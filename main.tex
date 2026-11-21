@@ -46,7 +46,7 @@
 \part{The CIVITA Network}
 %============================================================
 
-\chapter{Introduction}
+\chapter{Grand Challenge on the Calibration, Validation, and Benchmarking of Concrete Computational Models}
 Despite several decades of research, computational models for concrete have achieved only limited adoption in engineering practice. This limited translation is not due to a lack of scientific activity. On the contrary, the number of publications related to computational modeling of concrete has increased dramatically. Figure \ref{fig:scopus-concrete-nodeling} shows that Scopus-indexed publications on computational modeling of concrete increased from only a few hundred papers per year in the late 1970s and early 1980s to about 1,500–2,000 papers per year around 2000, then grew rapidly to roughly 7,000–8,000 papers per year by 2012–2015, and accelerated further after 2020, reaching more than 20,000 publications per year in the most recent data.
 
 \begin{figure}[h!]
@@ -62,7 +62,9 @@ The central problem is the lack of a broadly accepted framework for assessing wh
 
 This has motivated the launch of the \textit{Grand Challenge on the Calibration, Validation, and Benchmarking of Concrete Computational Models}, a community-driven initiative aimed at improving the reliability, transparency, reproducibility, and predictive capability of computational modeling in concrete mechanics.
 
+\include{working_group}
 
+\normalsize
 \chapter{CIVITA Architecture}
 CIVITA, the \textit{Computational Infrastructure for Validation, Integration, Testing, and Assessment}, is an open scientific platform designed to support the systematic development, calibration, validation, and assessment of computational models for concrete and cementitious materials. It provides the digital infrastructure for the \textit{Grand Challenge on the Calibration, Validation, and Benchmarking of Concrete Computational Models}.
 
@@ -75,7 +77,7 @@ The long-term vision of CIVITA is to establish a shared scientific environment i
     \label{fig:civita-architecture}
 \end{figure}
 
-CIVITA is organized around two complementary databases and three computational assessment environments:
+CIVITA is organized around two complementary databases and three computational assessment modules:
 
 \begin{enumerate}
     \item The \textbf{Experimental Database} provides structured experimental data together with information describing materials, specimens, geometries, test configurations, loading histories, instrumentation, and measured quantities.
@@ -97,12 +99,234 @@ A central principle of CIVITA is scientific traceability. Experimental datasets,
 
 More broadly, CIVITA seeks to support a transition toward validation-centered computational engineering. As experimental and computational databases expand and scientific workflows become increasingly automated, including through artificial-intelligence agents, the value of computational models will depend increasingly on the quality of the evidence supporting their predictive capability. CIVITA is conceived as the infrastructure through which that evidence can be collected, connected, interrogated, and progressively strengthened by the research community.
 
+\section{Experimental Database}
+
+\subsection{Guiding principles}
+%This document describes the structure, terminology, workflow, and file standards for submitting datasets to the Concrete Grand Challenge Experimental Database. The database structure is primarily designed to support calibration, validation, and benchmarking of concrete computational models through a curated, traceable, and machine-readable collection of experimental data.
+
+%The development of the experimental database will proceed in multiple phases, beginning with the current data collection and standardization effort. At this stage, the primary objective is to assemble a large, well-structured, and community-driven repository of experimental data relevant to concrete materials, structural components, and associated physical phenomena. The data are currently being curated through standardized spreadsheet templates that organize information into categories such as literature sources, keywords, material batches, specimen definitions, specimen geometries, reinforcement configurations, test setups, loading histories, measurement devices, printing variables, and experimental observations. The framework is designed to accommodate a broad range of data types, including scalar quantities, curves, tables, images, videos, and multidimensional fields. The current database structure separates reusable specimen-level information from test-level information to reduce redundancy and improve consistency across datasets. The specimen geometry, reinforcement layout, test setups, and devices \& supports schemes currently adopted are based on standardized parametric representations defined in dedicated parametrization libraries.
+
+%Furthermore, a major focus of this initial phase is the creation of controlled vocabularies, standardized metadata definitions, and machine-readable schema layers. This includes the use of unique identifiers, hierarchical relationships between entities, predefined taxonomies for mechanisms and test types, standardized parametrization schemes, and consistent naming conventions for files and folders. The goal is to ensure that the collected information is machine-readable, interoperable, and suitable for large-scale data analytics, model calibration, validation, benchmarking, and future AI-assisted workflows. During this phase, data contributors can continue using familiar spreadsheet-based workflows while progressively converging toward a unified and extensible data structure.
+
+%An additional component of the evolving infrastructure is the development of machine-readable schema and vocabulary definition layers based on structured formats such as JSON. These files will provide formal definitions of controlled vocabularies, metadata schemas, parameter descriptions, validation rules, unit conventions, parametrization libraries, and hierarchical relationships between database entities. The JSON layer will support automated validation, interoperability with external software platforms, API development, AI-assisted curation workflows, semantic search, ontology development, and future agent-based systems for automated data extraction and interpretation. The use of portable machine-readable schema definitions will also facilitate version control, extensibility, and synchronization between spreadsheet templates, database structures, parametrization libraries, and software tools interacting with the database.
+
+%Once the initial data collection effort reaches sufficient maturity, the database will transition to a more robust and scalable architecture based on a PostgreSQL relational database coupled with HDF5 storage for large numerical datasets. In this architecture, PostgreSQL will manage all metadata, indexing, relationships, provenance information, controlled vocabularies, parametrization libraries, schema definitions, search capabilities, and user queries, while HDF5 files will store computationally intensive data such as time histories, multidimensional fields, large tables, images, videos, and other high-volume experimental outputs. JSON-based schema and vocabulary layers will complement this architecture by providing structured machine-readable definitions and validation specifications interfacing with both the relational database and scientific data storage components. This hybrid approach combines the flexibility and query efficiency of relational databases with the performance and scalability of HDF5 for scientific data storage while maintaining extensible, interoperable, and machine-readable metadata standards.
+
+
+
+%\newpage
+%\chapter{Database Philosophy}
+
+The experimental database is guided by a set of core principles intended to ensure scientific rigor, long-term usability, interoperability, and compatibility with future computational workflows. In particular, the database architecture is designed to align as closely as possible with the FAIR data principles, namely that data should be \textbf{Findable}, \textbf{Accessible}, \textbf{Interoperable}, and \textbf{Reusable}. These principles are implemented through standardized identifiers, controlled vocabularies, machine-readable metadata, explicit provenance tracking, and extensible parametrization libraries.
+
+\vspace{5mm}
+The database follows the following main principles.
+
+\begin{enumerate}
+    \item {\textbf{Traceability and Provenance}}. Every data item must be traceable to the original literature source. Provenance information such as figure numbers, table references, extraction dates, and curator information should also be preserved whenever possible. This principle is essential to guarantee reproducibility, scientific transparency, and long-term reusability of the data.
+
+    \item {\textbf{Findability}}. All entities within the database are identified through standardized unique identifiers and organized according to a consistent hierarchical structure. Controlled vocabularies, standardized naming conventions, keywords, and machine-readable metadata facilitate indexing, semantic search, filtering, ontology integration, and automated discovery of relevant datasets across different experimental programs and laboratories.
+
+    \item {\textbf{Accessibility}}. The database structure is designed to support long-term accessibility of both metadata and associated experimental files. Metadata are stored in structured spreadsheet and future relational-database formats, while large data objects such as curves, tables, images, videos, and multidimensional datasets are stored as external files referenced through persistent identifiers and standardized folder structures. The framework is intended to support future API-based access, automated querying, and cloud-based data services.
+
+    \item {\textbf{Interoperability and Machine Readability}}. Data are represented using standardized parametrizations, controlled vocabularies, explicit units, machine-readable schema layers, and consistent file formats. The use of structured JSON schema and vocabulary definition files facilitates interoperability with external software platforms, ontology frameworks, computational workflows, digital twin infrastructures, and AI-assisted systems. This principle also enables automated parsing, validation, semantic indexing, and machine learning applications.
+
+    \item {\textbf{Reusability}}. The database is organized to maximize long-term scientific reuse of the data across different applications, including computational model calibration, validation, benchmarking, uncertainty quantification, and machine learning. Standardized parametrization schemes promote consistency and facilitate direct reuse of experimental information in computational workflows.
+
+    \item {\textbf{Separation of Metadata and Data Files}}. The spreadsheet and future relational database layers primarily store metadata, structured descriptors, identifiers, provenance information, and references to external files. Large experimental datasets, such as curves, tables, images, videos, multidimensional fields, and voxel data, are stored separately in dedicated files using standardized formats such as CSV, JSON, HDF5, images, or video formats. This separation improves scalability, maintainability, and computational efficiency.
+
+    \item {\textbf{Extensibility and Community-Driven Evolution}}. The database is designed to evolve over time. Contributors are encouraged to propose additional geometry types, test parametrizations, reinforcement configurations, observed mechanisms, device types, material descriptors, quantity types, ontology mappings, and schema extensions whenever the current libraries and vocabularies are insufficient. The parametrization libraries and machine-readable schema layers are therefore treated as living components of the database infrastructure.
+
+\end{enumerate}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./figs/database_hierarchy.png}
+    \caption{Hierarchical organization of the database showing the relationships between literature sources, material batches, geometries, reinforcement materials, reinforcement components, reinforcement layouts, specimens, tests, devices and supports, loading histories, and experimental data entries.}
+    \label{fig:database_hierarchy}
+\end{figure}
+
+
+
+\subsection{Database Hierarchy }
+The database is organized according to a hierarchical structure designed to preserve the logical relationships between literature sources, material systems, specimen definitions, experimental tests, and associated datasets (Fig.~\ref{fig:database_hierarchy}). At the highest level, each literature source represents a publication, report, thesis, dataset, or experimental campaign from which the data originate. Literature sources are linked to keywords that facilitate indexing, search, and categorization, as well as to reusable definitions of material batches, geometries, reinforcement systems, printing variables, specimens, tests, and associated datasets.
+
+Material batches describe the specific concrete mixtures or material systems investigated within a source. Geometries define reusable specimen geometrical configurations through standardized parametrizations provided in the geometry parametrization library. Printing variables provide reusable definitions relevant to additively manufactured specimens.
+
+The reinforcement hierarchy is organized through three distinct but interconnected entities: reinforcement materials, reinforcement components, and reinforcement layouts. Reinforcement materials define reusable material properties associated with reinforcing systems. Reinforcement components represent individual reinforcement entities, such as longitudinal bar layers, stirrup sets, tie systems, or externally bonded reinforcement elements, and combine reinforcement geometry with the associated reinforcement material definition. Reinforcement layouts and components are associated with a specific geometry. Multiple reinforcement components are then assembled into reusable reinforcement layouts representing complete reinforcement configurations for specimens.
+
+A specimen represents the combination of a material batch, geometry, reinforcement layout (if relevant), and optional printing variables (if relevant) associated with a physical specimen or specimen family.
+
+Specimens are connected to individual tests that contain detailed information about the experimental procedures, environmental conditions, loading configurations, and observed physical mechanisms. Each test serves as the central entity to which additional components are attached, including devices and supports, loading histories, and the collected experimental data. Devices and supports may represent actuators, sensors, fixtures, supports, instrumentation systems, or measurement devices associated with the test setup. Loading histories define loading protocols or time histories associated with a test and, when relevant, with a specific device.
+
+Experimental observations are organized through the data entity, which may include scalar quantities, curves, tables, images, videos, and multidimensional datasets together with their associated provenance and metadata. Data entries may optionally be linked to specific devices and supports when the measurements originate from a particular instrumentation component.
+
+
+\subsection{Parametrization Schemes}
+
+A major challenge in building a large-scale experimental database for concrete materials and structures is the enormous variability in specimen configurations, reinforcement layouts, boundary conditions, and testing procedures reported in the literature. Experimental programs are often described using highly heterogeneous terminology, inconsistent geometric definitions, incomplete drawings, or source-specific conventions that are difficult to interpret computationally. While this level of flexibility may be acceptable for traditional human interpretation of journal articles and reports, it creates severe limitations for machine readability and automated data extraction.
+
+To address these challenges, the database adopts \textbf{standardized parametrization schemes} for 
+\begin{enumerate}
+    \item specimen geometries
+    \item test setups
+    \item reinforcement layouts
+    \item devices, and supports configurations
+\end{enumerate}
+
+These parametrization schemes define a limited but extensible set of canonical representations capable of describing the vast majority of experimental configurations encountered in concrete and reinforced concrete mechanics research. The parametrizations are organized through dedicated geometry, test, reinforcement, devices, and supports libraries, described later in this documentation, that define standardized parameter names, coordinate conventions, and required descriptors.
+
+\vspace{5mm}
+The adoption of parametrized representations provides several important advantages.
+
+\begin{enumerate}
+
+\item \textbf{Machine readability and interoperability.} Standardized parametrizations transform heterogeneous experimental descriptions into structured machine-readable data. This enables automated parsing, validation, indexing, and integration across datasets originating from different laboratories, countries, and historical periods.
+
+\item \textbf{Consistency across datasets.} Canonical parameter names and coordinate conventions reduce ambiguity and minimize inconsistent interpretations of geometry dimensions, reinforcement locations, support conditions, and loading configurations.
+
+\item \textbf{Efficient storage and reduced redundancy.} Parametric descriptions require only a compact set of defining variables instead of large unstructured textual descriptions or multiple redundant drawings. The same parametrized geometry can also be reused across multiple tests.
+
+%\item \textbf{Automated generation of computational models.} Parametrized representations facilitate automatic generation of computational models . This capability is particularly important for future automated calibration, validation, and benchmarking workflows.
+
+\item \textbf{Support for machine learning applications.} Machine learning models require consistent numerical descriptors rather than free-form textual descriptions. Parametrized geometries and reinforcement schemes provide structured low-dimensional feature representations that can be directly used for classification, clustering, regression, surrogate modeling, and uncertainty quantification.
+
+\item \textbf{Scalability and future extensibility.} The parametrization libraries are designed to evolve over time. New geometry types, reinforcement configurations, and test setups can be added while preserving compatibility with existing datasets and workflows.
+
+\item \textbf{Improved traceability and reproducibility.} Standardized parametrizations make it easier to reproduce experiments computationally and verify the consistency of reported dimensions, reinforcement layouts, and loading configurations.
+
+\end{enumerate}
+
+The parametrization schemes adopted in the current version of the database are designed to balance simplicity, extensibility, and practical usability. The objective is not to reproduce every possible geometric detail found in experimental programs, but rather to capture the dominant features required for computational modeling, data analytics, and systematic comparison across datasets. When experimental configurations cannot be adequately represented by the current libraries, contributors are encouraged to propose extensions and additional parametrization types as part of the ongoing evolution of the database framework.
+
+\vspace{5mm}
+\noindent
+\fbox{%
+  \parbox{\linewidth}{%
+    \textbf{The absence of an existing parametrization scheme for a particular geometry, reinforcement configuration,  test setup, or device/support configuration is not a reason for exclusion from the database. In such cases, contributors should provide the most complete description possible using available metadata, drawings, images, parameter files, and notes, while also proposing potential extensions to the corresponding parametrization libraries.}
+  }%
+}
+
+
+
+
+\section{Computational Database}
+{\emph{Work in progress}}
+
+\section{Parameter Identification Module}
+{\emph{Work in progress}}
+
+\section{Validation Module}
+{\emph{Work in progress}}
+
+\section{Benchmarking Module}
+{\emph{Work in progress}}
 
 
 
     
     \chapter{Shared Scientific Definitions}
-\section{General conventions}
+
+
+\section{Literature Source Schema}
+\label{vocab:literature_source_tab_fields}
+
+The following table defines the literature source schema adopted by both the experimental and computational databases. The machine-readable definitions of these vocabulary entries are provided in \texttt{literature\_sources\_schema.json}.
+
+\begin{longtable}{p{0.26\textwidth}p{0.7\textwidth}}
+\hline
+\textbf{Field Name} & \textbf{Definition} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Field Name} & \textbf{Definition} \\
+\hline
+\endhead
+
+\texttt{source\_type} &
+Classification of the source document type. \\
+
+\texttt{peer\_reviewed} &
+Boolean field indicating whether the source underwent formal peer review prior to publication. \\
+
+\texttt{title} &
+Full title of the publication. \\
+
+\texttt{authors} &
+List of authors associated with the source document. \\
+
+\texttt{year} &
+Year of publication or public release of the source document. \\
+
+\texttt{journal\_or\_publisher} &
+Name of the journal, conference proceedings, publishing organization, institution, or publisher associated with the source. \\
+
+\texttt{volume} &
+Journal or proceedings volume number when applicable. \\
+
+\texttt{issue} &
+Journal or proceedings issue number when applicable. \\
+
+\texttt{pages} &
+Page range associated with the source document when applicable. \\
+
+\texttt{doi} &
+Digital Object Identifier associated with the source document. \\
+
+\texttt{url} &
+Web address or online repository link associated with the source document or dataset. \\
+
+\texttt{institution} &
+Institution, laboratory, university, company, agency, or organization associated with the source document or experimental program. \\
+
+\hline
+\end{longtable}
+
+\subsection{Literature Source Types}
+\label{vocab:source_type_list}
+
+The following table defines the controlled vocabulary for the \texttt{source\_type} field used in the \texttt{literature\_sources} tab. The machine-readable definitions of these vocabulary entries are provided in \texttt{source\_types.json}. 
+
+\begin{longtable}{p{0.24\textwidth}p{0.78\textwidth}}
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Term} & \textbf{Definition} \\
+\hline
+\endhead
+
+\texttt{book\_chapter} &
+A chapter published within an edited book or proceedings volume. \\
+
+\texttt{conference\_paper} &
+A paper published in conference proceedings or presented at a scientific or engineering conference. \\
+
+\texttt{dataset} &
+A standalone curated dataset, database, or data repository entry. \\
+
+\texttt{journal\_article} &
+An article published in a scientific, technical, or professional journal. \\
+
+\texttt{phd\_thesis} &
+A doctoral dissertation or PhD thesis submitted as part of a doctoral degree program. \\
+
+\texttt{report} &
+A technical, institutional, governmental, industrial, or research report. \\
+
+\texttt{other} &
+A source type that does not fall within the predefined categories. \\
+
+\hline
+\end{longtable}
+
+
+
+    
+%\section{General conventions}
 \section{Global Geometry Parametrization Library}
 The Geometry Parametrization Library defines the standardized parametric representations used to describe specimen geometries throughout the database. Its primary purpose is to convert heterogeneous geometric descriptions reported in the literature into consistent parameter sets. Each
 geometry type is represented through a predefined set of parameters, coordinate conventions, and dimensional descriptors stored in structured CSV or JSON-compatible formats. The parametrization framework enables consistent interpretation of specimen dimensions across datasets originating
@@ -310,185 +534,16 @@ The prism geometry is defined by the following parameters:
 
 
 
+
+
 %============================================================
 \part{Experimental Database}
 %============================================================
 
+
 \chapter{Introduction}
 
-\section{Vision}
-
-This document describes the structure, terminology, workflow, and file standards for submitting datasets to the Concrete Grand Challenge Experimental Database. The database structure is primarily designed to support calibration, validation, and benchmarking of concrete computational models through a curated, traceable, and machine-readable collection of experimental data.
-
-The development of the experimental database will proceed in multiple phases, beginning with the current data collection and standardization effort. At this stage, the primary objective is to assemble a large, well-structured, and community-driven repository of experimental data relevant to concrete materials, structural components, and associated physical phenomena. The data are currently being curated through standardized spreadsheet templates that organize information into categories such as literature sources, keywords, material batches, specimen definitions, specimen geometries, reinforcement configurations, test setups, loading histories, measurement devices, printing variables, and experimental observations. The framework is designed to accommodate a broad range of data types, including scalar quantities, curves, tables, images, videos, and multidimensional fields. The current database structure separates reusable specimen-level information from test-level information to reduce redundancy and improve consistency across datasets. The specimen geometry, reinforcement layout, test setups, and devices \& supports schemes currently adopted are based on standardized parametric representations defined in dedicated parametrization libraries.
-
-Furthermore, a major focus of this initial phase is the creation of controlled vocabularies, standardized metadata definitions, and machine-readable schema layers. This includes the use of unique identifiers, hierarchical relationships between entities, predefined taxonomies for mechanisms and test types, standardized parametrization schemes, and consistent naming conventions for files and folders. The goal is to ensure that the collected information is machine-readable, interoperable, and suitable for large-scale data analytics, model calibration, validation, benchmarking, and future AI-assisted workflows. During this phase, data contributors can continue using familiar spreadsheet-based workflows while progressively converging toward a unified and extensible data structure.
-
-An additional component of the evolving infrastructure is the development of machine-readable schema and vocabulary definition layers based on structured formats such as JSON. These files will provide formal definitions of controlled vocabularies, metadata schemas, parameter descriptions, validation rules, unit conventions, parametrization libraries, and hierarchical relationships between database entities. The JSON layer will support automated validation, interoperability with external software platforms, API development, AI-assisted curation workflows, semantic search, ontology development, and future agent-based systems for automated data extraction and interpretation. The use of portable machine-readable schema definitions will also facilitate version control, extensibility, and synchronization between spreadsheet templates, database structures, parametrization libraries, and software tools interacting with the database.
-
-Once the initial data collection effort reaches sufficient maturity, the database will transition to a more robust and scalable architecture based on a PostgreSQL relational database coupled with HDF5 storage for large numerical datasets. In this architecture, PostgreSQL will manage all metadata, indexing, relationships, provenance information, controlled vocabularies, parametrization libraries, schema definitions, search capabilities, and user queries, while HDF5 files will store computationally intensive data such as time histories, multidimensional fields, large tables, images, videos, and other high-volume experimental outputs. JSON-based schema and vocabulary layers will complement this architecture by providing structured machine-readable definitions and validation specifications interfacing with both the relational database and scientific data storage components. This hybrid approach combines the flexibility and query efficiency of relational databases with the performance and scalability of HDF5 for scientific data storage while maintaining extensible, interoperable, and machine-readable metadata standards.
-
-\footnotesize
-\section{Concrete Grand Challenge Working Group}
-
-The following table lists the current members of the Concrete Grand Challenge Working Group together with their institutional affiliations and contact information. This initial version of the database structure and collection strategy is the result of the concerted effort of this group. Particular credit goes to \textbf{M.Z. Naser} (Clemson University, \texttt{mznaser@clemson.edu}) for the development of the AI-assisted curation workflow.
-
-\begin{longtable}{p{0.12\textwidth}p{0.12\textwidth}p{0.25\textwidth}p{0.07\textwidth}p{0.30\textwidth}}
-\hline
-\textbf{First Name} &
-\textbf{Last Name} &
-\textbf{Institution} &
-\textbf{Country} &
-\textbf{Email} \\
-\hline
-\endfirsthead
-
-\hline
-\textbf{First Name} &
-\textbf{Last Name} &
-\textbf{Institution} &
-\textbf{Country} &
-\textbf{Email} \\
-\hline
-\endhead
-
-Ab & van den Bos & NLyseConsultants & NED & a.vandenbos@nlyseconsultants.com \\
-Ali & Behnood & University of Missisipi & USA & abehnood@olemiss.edu \\
-Anca & Ferche & UT at Austin & USA & ferche@austin.utexas.edu \\
-Ann & Goodell & Cal Poly & USA & anngood@calpoly.edu \\
-Christian & Carloni & Case Western University & USA & cxc966@case.edu \\
-Constantino & Menna & University of Naples & ITA & costantino.menna@unina.it \\
-Dimitrios & Kalliontzis & University of Huston & USA & dkallion@central.uh.edu \\
-Ebenezer & Fanijo & Georgia Tech & USA & ebenfanijo@gatech.edu \\
-Ehab & Hamed & The Un. of New South Wales & AUS & e.hamed@unsw.edu.au \\
-Eric & Landis & University of Maine & USA & landis@maine.edu \\
-Erik & Schlangen & TU Delft & NED & erik.schlangen@tudelft.nl \\
-Fabio & Matta & University of South Carolina & USA & mattaf@cec.sc.edu \\
-Gabriel & Ackall & Virginia tech & USA & gackall@vt.edu \\
-Gianluca & Cusatis & Northwestern University & USA & g-cusatis@northwestern.edu \\
-Giovanni & Di Luzio & Politecnico di Milano & ITA & giovanni.diluzio@polimi.it \\
-Jan & Cervenka & Cervenka consulting & CZE & jan.cervenka@cervenka.cz \\
-Jia-Liang & Le & University of Minnesota & USA & jle@umn.edu \\
-Jiaqui & Liu & Northwestern University & USA & jiaqi.liu2@northwestern.edu \\
-John & Bolander & UC Davis & USA & jebolander@ucdavis.edu \\
-Jorg & Unger & BAM & DEU & joerg.unger@bam.de \\
-Kamran & Aghaee & West Virginia State Uni. & USA & kamran.aghaee@wvstateu.edu \\
-Luca & Sorelli & Laval University & Canada & luca.sorelli@gci.ulaval.ca \\
-Luna & Hasani & Kiewit Corporation & USA & luna.hasani90@gmail.com \\
-Matthew & Soltani & Bradley University & USA & msoltani@bradley.edu \\
-Mohammed & Alnaggar & ORNL & USA & alnaggarmg@ornl.gov \\
-MZ & Naser & Clemson University & USA & mznaser@clemson.edu \\
-Nick & Sonnentang & Sunnyday Technologies & USA & nick@sunn3d.com \\
-Nishant & Garg & UIUC & USA & nishantg@illinois.edu \\
-Reza & Moini & Princeton University & USA & mmoini@princeton.edu \\
-Shady & Gomaa & University of Alabama & USA & sgomaa@ua.edu \\
-Stephanie & Paal & Texas A\&M University & USA & spaal@civil.tamu.edu \\
-Viktor & Gribniak & Vilnius Gediminas Tech. Un. & LTU & viktor.gribniak@vilniustech.lt \\
-Yuchen & Li & Northwestern University & USA & yuchenli2025@u.northwestern.edu \\
-\hline
-\end{longtable}
-
-%\vspace{0.5cm}
-
-\noindent
-For additional information or expressions of interest regarding participation in the Concrete Grand Challenge Working Group, please contact: \textbf{Gianluca Cusatis}, Northwestern University, \texttt{g-cusatis@northwestern.edu}.
-\normalsize
-
-
-\newpage
-\chapter{Database Philosophy}
-
-The database is guided by a set of core principles intended to ensure scientific rigor, long-term usability, interoperability, and compatibility with future computational workflows. In particular, the database architecture is designed to align as closely as possible with the FAIR data principles, namely that data should be \textbf{Findable}, \textbf{Accessible}, \textbf{Interoperable}, and \textbf{Reusable}. These principles are implemented through standardized identifiers, controlled vocabularies, machine-readable metadata, explicit provenance tracking, and extensible parametrization libraries.
-
-\vspace{5mm}
-The database follows the following main principles.
-
-\begin{enumerate}
-    \item {\textbf{Traceability and Provenance}}. Every data item must be traceable to the original literature source. Provenance information such as figure numbers, table references, extraction dates, and curator information should also be preserved whenever possible. This principle is essential to guarantee reproducibility, scientific transparency, and long-term reusability of the data.
-
-    \item {\textbf{Findability}}. All entities within the database are identified through standardized unique identifiers and organized according to a consistent hierarchical structure. Controlled vocabularies, standardized naming conventions, keywords, and machine-readable metadata facilitate indexing, semantic search, filtering, ontology integration, and automated discovery of relevant datasets across different experimental programs and laboratories.
-
-    \item {\textbf{Accessibility}}. The database structure is designed to support long-term accessibility of both metadata and associated experimental files. Metadata are stored in structured spreadsheet and future relational-database formats, while large data objects such as curves, tables, images, videos, and multidimensional datasets are stored as external files referenced through persistent identifiers and standardized folder structures. The framework is intended to support future API-based access, automated querying, and cloud-based data services.
-
-    \item {\textbf{Interoperability and Machine Readability}}. Data are represented using standardized parametrizations, controlled vocabularies, explicit units, machine-readable schema layers, and consistent file formats. The use of structured JSON schema and vocabulary definition files facilitates interoperability with external software platforms, ontology frameworks, computational workflows, digital twin infrastructures, and AI-assisted systems. This principle also enables automated parsing, validation, semantic indexing, and machine learning applications.
-
-    \item {\textbf{Reusability}}. The database is organized to maximize long-term scientific reuse of the data across different applications, including computational model calibration, validation, benchmarking, uncertainty quantification, and machine learning. Standardized parametrization schemes promote consistency and facilitate direct reuse of experimental information in computational workflows.
-
-    \item {\textbf{Separation of Metadata and Data Files}}. The spreadsheet and future relational database layers primarily store metadata, structured descriptors, identifiers, provenance information, and references to external files. Large experimental datasets, such as curves, tables, images, videos, multidimensional fields, and voxel data, are stored separately in dedicated files using standardized formats such as CSV, JSON, HDF5, images, or video formats. This separation improves scalability, maintainability, and computational efficiency.
-
-    \item {\textbf{Extensibility and Community-Driven Evolution}}. The database is designed to evolve over time. Contributors are encouraged to propose additional geometry types, test parametrizations, reinforcement configurations, observed mechanisms, device types, material descriptors, quantity types, ontology mappings, and schema extensions whenever the current libraries and vocabularies are insufficient. The parametrization libraries and machine-readable schema layers are therefore treated as living components of the database infrastructure.
-
-\end{enumerate}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\linewidth]{./figs/database_hierarchy.png}
-    \caption{Hierarchical organization of the database showing the relationships between literature sources, material batches, geometries, reinforcement materials, reinforcement components, reinforcement layouts, specimens, tests, devices and supports, loading histories, and experimental data entries.}
-    \label{fig:database_hierarchy}
-\end{figure}
-
-
-
-\section{Database Hierarchy }
-The database is organized according to a hierarchical structure designed to preserve the logical relationships between literature sources, material systems, specimen definitions, experimental tests, and associated datasets (Fig.~\ref{fig:database_hierarchy}). At the highest level, each literature source represents a publication, report, thesis, dataset, or experimental campaign from which the data originate. Literature sources are linked to keywords that facilitate indexing, search, and categorization, as well as to reusable definitions of material batches, geometries, reinforcement systems, printing variables, specimens, tests, and associated datasets.
-
-Material batches describe the specific concrete mixtures or material systems investigated within a source. Geometries define reusable specimen geometrical configurations through standardized parametrizations provided in the geometry parametrization library. Printing variables provide reusable definitions relevant to additively manufactured specimens.
-
-The reinforcement hierarchy is organized through three distinct but interconnected entities: reinforcement materials, reinforcement components, and reinforcement layouts. Reinforcement materials define reusable material properties associated with reinforcing systems. Reinforcement components represent individual reinforcement entities, such as longitudinal bar layers, stirrup sets, tie systems, or externally bonded reinforcement elements, and combine reinforcement geometry with the associated reinforcement material definition. Reinforcement layouts and components are associated with a specific geometry. Multiple reinforcement components are then assembled into reusable reinforcement layouts representing complete reinforcement configurations for specimens.
-
-A specimen represents the combination of a material batch, geometry, reinforcement layout (if relevant), and optional printing variables (if relevant) associated with a physical specimen or specimen family.
-
-Specimens are connected to individual tests that contain detailed information about the experimental procedures, environmental conditions, loading configurations, and observed physical mechanisms. Each test serves as the central entity to which additional components are attached, including devices and supports, loading histories, and the collected experimental data. Devices and supports may represent actuators, sensors, fixtures, supports, instrumentation systems, or measurement devices associated with the test setup. Loading histories define loading protocols or time histories associated with a test and, when relevant, with a specific device.
-
-Experimental observations are organized through the data entity, which may include scalar quantities, curves, tables, images, videos, and multidimensional datasets together with their associated provenance and metadata. Data entries may optionally be linked to specific devices and supports when the measurements originate from a particular instrumentation component.
-
-
-\section{Parametrization Schemes}
-
-A major challenge in building a large-scale experimental database for concrete materials and structures is the enormous variability in specimen configurations, reinforcement layouts, boundary conditions, and testing procedures reported in the literature. Experimental programs are often described using highly heterogeneous terminology, inconsistent geometric definitions, incomplete drawings, or source-specific conventions that are difficult to interpret computationally. While this level of flexibility may be acceptable for traditional human interpretation of journal articles and reports, it creates severe limitations for machine readability and automated data extraction.
-
-To address these challenges, the database adopts \textbf{standardized parametrization schemes} for 
-\begin{enumerate}
-    \item specimen geometries
-    \item test setups
-    \item reinforcement layouts
-    \item devices, and supports configurations
-\end{enumerate}
-
-These parametrization schemes define a limited but extensible set of canonical representations capable of describing the vast majority of experimental configurations encountered in concrete and reinforced concrete mechanics research. The parametrizations are organized through dedicated geometry, test, reinforcement, devices, and supports libraries, described later in this documentation, that define standardized parameter names, coordinate conventions, and required descriptors.
-
-\vspace{5mm}
-The adoption of parametrized representations provides several important advantages.
-
-\begin{enumerate}
-
-\item \textbf{Machine readability and interoperability.} Standardized parametrizations transform heterogeneous experimental descriptions into structured machine-readable data. This enables automated parsing, validation, indexing, and integration across datasets originating from different laboratories, countries, and historical periods.
-
-\item \textbf{Consistency across datasets.} Canonical parameter names and coordinate conventions reduce ambiguity and minimize inconsistent interpretations of geometry dimensions, reinforcement locations, support conditions, and loading configurations.
-
-\item \textbf{Efficient storage and reduced redundancy.} Parametric descriptions require only a compact set of defining variables instead of large unstructured textual descriptions or multiple redundant drawings. The same parametrized geometry can also be reused across multiple tests.
-
-\item \textbf{Automated generation of computational models.} Parametrized representations facilitate automatic generation of computational models . This capability is particularly important for future automated calibration, validation, and benchmarking workflows.
-
-\item \textbf{Support for machine learning applications.} Machine learning models require consistent numerical descriptors rather than free-form textual descriptions. Parametrized geometries and reinforcement schemes provide structured low-dimensional feature representations that can be directly used for classification, clustering, regression, surrogate modeling, and uncertainty quantification.
-
-\item \textbf{Scalability and future extensibility.} The parametrization libraries are designed to evolve over time. New geometry types, reinforcement configurations, and test setups can be added while preserving compatibility with existing datasets and workflows.
-
-\item \textbf{Improved traceability and reproducibility.} Standardized parametrizations make it easier to reproduce experiments computationally and verify the consistency of reported dimensions, reinforcement layouts, and loading configurations.
-
-\end{enumerate}
-
-The parametrization schemes adopted in the current version of the database are designed to balance simplicity, extensibility, and practical usability. The objective is not to reproduce every possible geometric detail found in experimental programs, but rather to capture the dominant features required for computational modeling, data analytics, and systematic comparison across datasets. When experimental configurations cannot be adequately represented by the current libraries, contributors are encouraged to propose extensions and additional parametrization types as part of the ongoing evolution of the database framework.
-
-\vspace{5mm}
-\noindent
-\fbox{%
-  \parbox{\linewidth}{%
-    \textbf{The absence of an existing parametrization scheme for a particular geometry, reinforcement configuration,  test setup, or device/support configuration is not a reason for exclusion from the database. In such cases, contributors should provide the most complete description possible using available metadata, drawings, images, parameter files, and notes, while also proposing potential extensions to the corresponding parametrization libraries.}
-  }%
-}
-
-
+NEEDS TO BE UPDATED
 
 \section{Manual Data Submission}
 
@@ -806,7 +861,7 @@ Examples of optional but highly encouraged information include DOI identifiers, 
 \newpage
 
 %============================================================
-\chapter{Step-by-Step Manual Submission Workflow - Deprecated}
+\chapter{Spreadsheet Manual Submission Workflow - Deprecated}
 %============================================================
 
 \section{Create Source Folder}
@@ -2421,7 +2476,22 @@ illustrations, or experimental videos relevant to the interpretation of the data
 
 
 \newpage
-\chapter{AI-Assisted Submission Workflow}
+\chapter{Manual Submission Workflow}
+{\emph{under development}}
+
+\newpage
+\chapter{Manual Submission Workflow with Digitazion}
+{\emph{under development}}
+
+
+
+\newpage
+\chapter{AI-Assisted Submission Workflow with Cloud LLM}
+{\emph{under development}}
+
+
+\newpage
+\chapter{AI-Assisted Submission Workflow with Local LLM}
 {\emph{under development}}
 
 \newpage
@@ -2841,100 +2911,6 @@ Unique identifier of an experimental observation or dataset, including scalar qu
 \hline
 \end{longtable}
 
-\section{Literature Source Tab Fields}
-\label{vocab:literature_source_tab_fields}
-
-The following table defines the fields used in the \texttt{literature\_sources} tab. The machine-readable definitions of these vocabulary entries are provided in \texttt{literature\_source\_tab\_fields.json}.
-
-\begin{longtable}{p{0.26\textwidth}p{0.7\textwidth}}
-\hline
-\textbf{Field Name} & \textbf{Definition} \\
-\hline
-\endfirsthead
-
-\hline
-\textbf{Field Name} & \textbf{Definition} \\
-\hline
-\endhead
-
-\texttt{source\_type} &
-Classification of the source document type. \\
-
-\texttt{peer\_reviewed} &
-Boolean field indicating whether the source underwent formal peer review prior to publication. \\
-
-\texttt{title} &
-Full title of the publication. \\
-
-\texttt{authors} &
-List of authors associated with the source document. \\
-
-\texttt{year} &
-Year of publication or public release of the source document. \\
-
-\texttt{journal\_or\_publisher} &
-Name of the journal, conference proceedings, publishing organization, institution, or publisher associated with the source. \\
-
-\texttt{volume} &
-Journal or proceedings volume number when applicable. \\
-
-\texttt{issue} &
-Journal or proceedings issue number when applicable. \\
-
-\texttt{pages} &
-Page range associated with the source document when applicable. \\
-
-\texttt{doi} &
-Digital Object Identifier associated with the source document. \\
-
-\texttt{url} &
-Web address or online repository link associated with the source document or dataset. \\
-
-\texttt{institution} &
-Institution, laboratory, university, company, agency, or organization associated with the source document or experimental program. \\
-
-\hline
-\end{longtable}
-
-\subsection{Literature Source Types}
-\label{vocab:source_type_list}
-
-The following table defines the controlled vocabulary for the \texttt{source\_type} field used in the \texttt{literature\_sources} tab. The machine-readable definitions of these vocabulary entries are provided in \texttt{source\_types.json}. 
-
-\begin{longtable}{p{0.24\textwidth}p{0.78\textwidth}}
-\hline
-\textbf{Term} & \textbf{Definition} \\
-\hline
-\endfirsthead
-
-\hline
-\textbf{Term} & \textbf{Definition} \\
-\hline
-\endhead
-
-\texttt{book\_chapter} &
-A chapter published within an edited book or proceedings volume. \\
-
-\texttt{conference\_paper} &
-A paper published in conference proceedings or presented at a scientific or engineering conference. \\
-
-\texttt{dataset} &
-A standalone curated dataset, database, or data repository entry. \\
-
-\texttt{journal\_article} &
-An article published in a scientific, technical, or professional journal. \\
-
-\texttt{phd\_thesis} &
-A doctoral dissertation or PhD thesis submitted as part of a doctoral degree program. \\
-
-\texttt{report} &
-A technical, institutional, governmental, industrial, or research report. \\
-
-\texttt{other} &
-A source type that does not fall within the predefined categories. \\
-
-\hline
-\end{longtable}
 
 
 \section{Material Batch Tab Fields}
@@ -6126,15 +6102,400 @@ Reporting type not specified or not identifiable from the available documentatio
 \chapter{Database Search Application}
 
 
-\part{Computational Database}
+\part{Computational Database \\ {\emph{under development}}}
+
+
+\chapter{Introduction and Definitions}
+
+
+The CIVITA Computational Database provides a structured
+environment for the registration, documentation, and
+management of computational frameworks used to simulate
+the mechanical and physical behavior of concrete. Its
+primary objective is to establish a consistent and
+traceable representation of computational methodologies,
+enabling their identification, reuse, and systematic
+comparison across different applications.
+
+
+\section{Computational Frameworks}
+\label{sec:computational_frameworks}
+
+
+
+A Computational Framework (CFW) is defined as a specific
+combination of a concrete material model, numerical methods
+and algorithms, a software implementation, and a computational
+architecture and parallelization strategy. These components
+identify the computational methodology and its implementation
+independently of the particular boundary value problem being
+simulated.
+
+
+Computational Frameworks are reusable scientific entities
+within CIVITA. Once registered, they can be referenced
+by multiple contributors and across different CIVITA
+modules, including Parameter Identification, Validation,
+and Benchmarking. Their registration establishes a
+documented computational methodology and does not imply
+that its predictive capabilities, numerical accuracy,
+or computational efficiency have been independently
+assessed.
+
+\subsection{Computational Framework Definition}
+\label{sec:cfw_definition}
+
+Each Computational Framework is characterized by four
+principal components.
+
+\paragraph{1. Concrete Material Model.} This component identifies the mathematical formulation used to represent the mechanical and physical behavior
+of concrete. It includes the underlying constitutive
+relations, relevant model variants, and the definitions
+of the associated material parameters. Examples include the lattice discrete particle models, microplane models, continuum damage-plasticity
+models, and other discrete or continuum formulations.
+Different constitutive formulations, including distinct
+variants of the same model family, may constitute
+different Computational Frameworks. The material parameter values adopted in a particular simulation are documented in the corresponding simulation
+record, whereas the Computational Framework specifies
+their definitions and the mathematical formulation in
+which they are used.
+
+
+\paragraph{2. Numerical Methods and Algorithms.}
+This component identifies the numerical methods and algorithms
+used to discretize and solve the governing equations of motion
+of the concrete body. These include spatial discretization
+strategies, explicit or implicit time-integration schemes,
+nonlinear solution procedures, linear solvers, and other
+algorithms directly associated with the numerical solution
+of the concrete material model. A Computational Framework may support multiple numerical
+methods and algorithms, which are documented as part of its
+registered capabilities. The specific algorithms selected
+for an individual simulation, together with their numerical
+parameters and settings, are recorded in the corresponding
+simulation submission. Numerical procedures associated with the implementation
+of benchmark-specific boundary conditions, kinematic
+constraints, loading, and interactions between the concrete
+body and other bodies are documented as part of the
+simulation modeling approach within the corresponding
+submission.
+
+
+
+\paragraph{3. Software Implementation.} This component identifies the software in which the
+computational methodology is implemented. Relevant
+information includes the software name, version,
+implementation characteristics, and references to
+the source code when available. The distinction between the mathematical formulation
+and its software implementation is essential because
+the same concrete material model may be implemented
+independently in different software environments. 
+
+\paragraph{4. Computational Architecture and
+Parallelization Strategy.} This component describes the general computational
+architecture and parallelization approaches supported
+by the implementation, including serial, shared-memory,
+distributed-memory, GPU-based, and heterogeneous
+computing strategies. Relevant characteristics may include the use of MPI,
+OpenMP, CUDA, or other parallel programming technologies,
+as well as domain decomposition, load balancing, and
+the distribution of computations between CPUs and GPUs. The Computational Framework describes the implemented
+computational architecture. The specific hardware and
+computing resources used in an execution, including
+processor models, number of MPI ranks, CPU threads,
+and GPUs, are recorded as part of the corresponding
+simulation submission.
+
+\subsection{Framework Identity and Classification}
+\label{sec:cfw_identity}
+
+The identity of a Computational Framework is determined by
+the registered formulation and numerical solution capabilities
+associated with the concrete material model, together with
+its software implementation and computational architecture.
+The selection of particular supported algorithms or the
+adoption of different numerical procedures for implementing
+benchmark-specific boundary conditions and interactions
+does not, by itself, establish a distinct Computational
+Framework.
+
+Each registered Computational Framework is assigned
+a persistent identifier, provisionally following the
+convention \texttt{CFW0001}, \texttt{CFW0002}, and so on. The identity of a Computational Framework is determined by the combination of its four defining components. Changes that alter the fundamental physical, mathematical,
+numerical, or architectural characteristics of a framework
+may require registration of a distinct framework.
+
+For example, replacing LDPM17 with LDPM26 would generally
+constitute a new Computational Framework, even if the
+software implementation and other components remain
+unchanged. Similarly, adopting a fundamentally different
+numerical solution methodology or computational architecture
+may justify a new framework identity.
+
+In contrast, changes in material parameter values,
+discretization resolution, stochastic realizations,
+or allocated computing resources ordinarily characterize
+individual simulations and do not independently establish
+a new Computational Framework.
+
+The distinction between different frameworks and different
+versions of the same framework is based on the scientific
+and technical significance of the modifications. CIVITA
+provides classification guidelines and reviews submitted
+requests to ensure consistency across the registry.
+
+\subsection{Registration and Versioning}
+\label{sec:cfw_registration}
+
+Computational Frameworks are introduced into CIVITA
+through a dedicated registration interface. Registered
+users may request either the creation of a new framework
+or an update to an existing framework.
+
+\paragraph{New Framework Registration.} A contributor submits the definition of a proposed Computational Framework, documenting its four principal
+components. The request may identify an existing framework
+from which the proposed framework has been derived,
+together with the components that have been modified. Upon approval, CIVITA assigns a new persistent framework identifier and publishes its initial version.
+
+\paragraph{Framework Update.} A contributor may propose modifications to an existing
+Computational Framework and request publication of a new
+version under its existing identifier. The request identifies the proposed changes and explains why they preserve the fundamental identity of the
+registered framework. Examples may include software defect corrections,
+implementation optimizations, and improvements that
+retain the defining mathematical and numerical methodology. The contributor is initially responsible for selecting
+the appropriate request type. CIVITA reviews the proposed
+classification and may require the registration of a
+distinct framework when the modifications are incompatible
+with the identity of the existing framework.
+
+\paragraph{Version immutability.} Each approved and published framework version constitutes an immutable scientific record. Any subsequent modification
+to its registered definition requires publication of a
+new version or registration of a distinct framework. Published versions remain permanently identifiable and available for reference by other CIVITA modules. This
+ensures that computational contributions can be traced
+to the exact framework definitions used to generate them. Framework versions are assigned explicit version numbers,
+such as \texttt{1.0.0}. The detailed versioning policy,
+including the criteria governing major, minor, and
+corrective revisions, will be established as part of
+the registry procedures.
+
+\subsection{Relationships Among Computational Frameworks}
+\label{sec:cfw_relationships}
+
+The Computational Database maintains explicit relationships
+among successive versions of a framework and among
+distinct but related frameworks. These relationships are particularly important when
+frameworks share most of their defining components.
+For example, two frameworks may employ the same software
+implementation, numerical algorithms, and computational
+architecture while differing in the concrete material
+model used to represent constitutive behavior.
+
+CIVITA will support the identification of such
+relationships to facilitate systematic comparisons
+across frameworks and to document the evolution of
+computational methodologies.
+
+When requesting a new framework registration, contributors
+may identify an existing framework as the basis for their
+development and specify the components that differ.
+
+The framework registry may eventually support additional
+component-level identifiers and classifications. However,
+the initial implementation will retain the four components
+as structured elements of each framework definition,
+without requiring independent registration of every
+component.
+
+\subsection{Framework Stewardship and Governance}
+\label{sec:cfw_governance}
+
+Each Computational Framework is associated with one or
+more designated stewards responsible for coordinating
+the maintenance and evolution of its registered definition. The contributor responsible for the initial registration
+may serve as the first steward. Additional stewards may
+be designated to support collaborative development,
+including contributions from multiple researchers
+within the same research group or organization. Framework stewardship governs the maintenance of the
+registered scientific definition. It does not confer
+exclusive rights to use the framework within CIVITA.
+
+Any registered CIVITA user may reference a published
+Computational Framework when submitting computational
+results through other CIVITA modules. Users outside the stewardship group may also propose modifications to an existing framework. Such proposals
+are submitted for assessment by the designated stewards
+and subsequent CIVITA review.
+
+If a proposed modification is not accepted as an update,
+the contributor may request registration of a new,
+related Computational Framework. This mechanism supports
+independent scientific development while preserving
+the integrity of existing registered definitions.
+
+CIVITA curators retain responsibility for reviewing
+registration requests, evaluating framework classifications,
+and approving new framework identities and versions. Changes in stewardship assignments, user permissions, and other administrative information are maintained
+separately from the immutable scientific definitions.
+
+\subsection{Data Structure and Interoperability}
+\label{sec:cfw_data_structure}
+
+The Computational Database will adopt a structured
+JSON schema for Computational Framework registration. The schema will include the four defining framework components, together with persistent identification,
+versioning information, references, and relationships
+to other registered frameworks. A dedicated web interface will support framework
+registration requests, updates, and the corresponding
+review procedures. 
+
+The framework registry will operate as a shared resource
+within CIVITA. Individual modules will reference registered
+frameworks through their persistent identifiers and
+version numbers, avoiding unnecessary duplication of
+their scientific definitions. For example, the CIVITA Benchmarking Module will
+associate each simulation submission with the exact
+registered Computational Framework used to obtain
+the numerical results. 
+
+Similarly, the Parameter
+Identification and Validation modules may reference
+the same framework when documenting parameter
+identification exercises or predictive assessments. This architecture establishes a common computational reference system across CIVITA while allowing its
+individual modules to evolve independently. The detailed registration schema, required metadata, submission interface, and governance procedures will
+be progressively refined during development of the
+Computational Database.
+
+
+\section{Computational Frameworks: Current Development Status}
+\label{sec:computational_frameworks_status}
+
+\begingroup
+\color{red}
+
+\noindent\textbf{Status: November 20, 2026.}
+This section summarizes the current development of the CIVITA
+Computational Framework registration architecture and identifies
+the remaining decisions.
+
+\subsection*{Overall Architecture}
+
+A Computational Framework (CFW) is defined by four components:
+\begin{enumerate}
+    \item Concrete Material Model (CMM);
+    \item Numerical Methods and Algorithms (NMA);
+    \item Software Implementation (SWI);
+    \item Computational Architecture and Parallelization Strategy (CPA).
+\end{enumerate}
+
+Each component is independently registered, assigned a persistent
+CIVITA identifier (CMMxxxx, NMAxxxx, SWIxxxx, or CPAxxxx), and
+versioned. A Computational Framework receives its own identifier
+(CFWxxxx) and references specific versions of the four components.
+
+Published component and framework versions are immutable.
+Modifications require registration of a new version or, when
+appropriate, a distinct entity.
+
+\subsection*{Framework Definition Versus Simulation Submission}
+
+A fundamental distinction has been established between reusable
+Computational Framework definitions and benchmark-specific
+Simulation Submissions.
+
+The Computational Framework describes the material formulation,
+numerical methods, software implementation, and computational
+capabilities. A Simulation Submission specifies the actual
+parameter values, discretization realization, selected numerical
+algorithms and settings, and execution configuration.
+
+For continuum models, spatial discretization is generally
+introduced through the numerical solution methodology. In
+crack-band regularized models, the constitutive response also
+depends on a characteristic discretization length. For discrete
+mesostructural models such as LDPM, the material representation
+itself is intrinsic to the formulation, whereas the particular
+particle arrangement and connectivity are simulation-specific.
+
+\subsection*{Component 1: Concrete Material Model}
+
+The initial JSON schema for Component 1 has been developed,
+and LDPM17 has been documented as the first example
+(CMM0001, version 1.0.0).
+
+The model definition includes the material representation,
+strain and stress definitions, physical mechanisms, literature
+references, and three parameter groups:
+
+\begin{enumerate}
+    \item \textbf{Mix design:} cement content, water-to-cement
+    ratio, mass density, minimum and maximum aggregate sizes,
+    aggregate size distribution specified through a Fuller
+    curve or sieve curve, and the derived aggregate-to-cement
+    ratio.
+
+    \item \textbf{Model parameters:} 20 constitutive parameters,
+    including their names, symbols, units, and associated
+    physical mechanisms.
+
+    \item \textbf{Derived model parameters:} 13 parameters
+    defined through mathematical relationships involving
+    model parameters and, where applicable, discretization
+    characteristics.
+\end{enumerate}
+
+The model registration contains parameter definitions without
+numerical values. Numerical values are provided in individual
+Simulation Submissions.
+
+The current reference file is
+\texttt{concrete\_material\_model\_LDPM17.json}.
+
+\subsection*{Component 2: Numerical Methods and Algorithms}
+
+Preliminary discussions have identified the following information
+categories for Component 2: spatial discretization, time
+integration, nonlinear solution algorithms, linear solution
+algorithms, numerical controls, and literature references.
+
+The scope of this component is restricted to algorithms used to
+discretize and solve the governing equations of the concrete body.
+Numerical procedures associated with benchmark-specific boundary
+conditions, loading, constraints, and interactions with other
+bodies are documented in Simulation Submissions.
+
+One architectural decision remains open: whether an NMA entity
+should represent an individual numerical methodology or a
+collection of mutually compatible algorithms supported by a
+Computational Framework. The preliminary recommendation is to
+adopt the latter approach, while allowing each Simulation
+Submission to identify the specific algorithms employed.
+
+\subsection*{Next Development Steps}
+
+The next task is to finalize the structure of Component 2,
+particularly the relationships between time-integration
+algorithms, nonlinear and linear solution procedures, and
+numerical controls. A JSON template and an LDPM17-related
+example will then be developed.
+
+Subsequently, the schemas for Component 3 (Software
+Implementation) and Component 4 (Computational Architecture
+and Parallelization Strategy) will be defined.
+
+The final step will be to establish the complete Computational
+Framework registration schema, including references to the
+four independently registered and versioned components.
+
+\endgroup
+
+
+\part{Parameter Identification Module}
 {\emph{under development}}
 
-\part{Parameter identification Application}
+\part{Validation Module}
 {\emph{under development}}
 
-\part{Validation Application}
-{\emph{under development}}
-\part{benchmarking Application}
+
+
+\part{benchmarking Module}
 {\emph{under development}}
 
 
