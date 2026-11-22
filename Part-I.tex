@@ -1,0 +1,81 @@
+%============================================================
+\part{The CIVITA Network}
+%============================================================
+
+\chapter{The Concrete Modeling Grand Challenge}
+
+\section{Motivation and Background}
+Despite several decades of research, computational models for concrete have achieved only limited adoption in engineering practice. This limited translation is not due to a lack of scientific activity. On the contrary, the number of publications related to computational modeling of concrete has increased dramatically. Figure \ref{fig:scopus-concrete-nodeling} shows that Scopus-indexed publications on computational modeling of concrete increased from only a few hundred papers per year in the late 1970s and early 1980s to about 1,500–2,000 papers per year around 2000, then grew rapidly to roughly 7,000–8,000 papers per year by 2012–2015, and accelerated further after 2020, reaching more than 20,000 publications per year in the most recent data.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{./figs/scopus.png}
+    \caption{Growth of Scopus-indexed publications on computational modeling of concrete from the mid-1970s to the mid-2020s.}
+    \label{fig:scopus-concrete-nodeling}
+\end{figure}
+
+However, this growth has not been matched by a comparable increase in practical confidence, standardization, or routine use in engineering design. Significant intellectual and financial resources continue to be invested in the development of new models, refinements of existing formulations, and increasingly complex numerical implementations. Yet, many of these efforts remain incremental and are often not accompanied by rigorous validation, transparent comparison against experimental evidence, or systematic benchmarking against existing, competing approaches.
+
+The central problem is the lack of a broadly accepted framework for assessing whether such models are reliable, predictive, and useful for practical applications. Without curated experimental databases, standardized validation protocols, and objective comparative assessments, the concrete modeling community risks continued growth in publication volume without corresponding progress in engineering adoption. This gap between research productivity and practical impact motivates the need for a coordinated effort focused on calibration, validation, benchmarking, and community-wide standards for concrete computational models.
+
+This has motivated the launch of the \textit{Grand Challenge on the Calibration, Validation, and Benchmarking of Concrete Computational Models}, a community-driven initiative aimed at improving the reliability, transparency, reproducibility, and predictive capability of computational modeling in concrete mechanics.
+
+
+
+\section{Objectives of the Grand Challenge}
+
+The primary objective of the Grand Challenge is to promote a systematic, transparent, and reproducible assessment of concrete computational models, ultimately increasing confidence in their predictive capabilities and facilitating their adoption in engineering practice.
+
+To achieve this objective, the initiative seeks to establish a coordinated framework for collecting and curating experimental evidence, calibrating model parameters, evaluating predictions against independent experimental data, and benchmarking alternative modeling approaches and numerical implementations. Particular emphasis is placed on developing shared protocols, quantitative assessment criteria, and openly accessible scientific resources that enable objective comparisons and cumulative progress.
+
+The Grand Challenge also aims to foster collaboration among researchers, software developers, and engineering practitioners, encouraging the development of community-wide standards and a scientific culture in which computational models are evaluated on the basis of demonstrated predictive performance.
+
+\section{The Role of CIVITA}
+
+CIVITA (Computational Infrastructure for Validation, Integration, Testing, and Assessment) provides the scientific and digital infrastructure supporting the Grand Challenge. It integrates experimental and computational databases with dedicated environments for parameter identification, validation, and benchmarking.
+
+Through standardized scientific definitions, interoperable data structures, and traceable computational workflows, CIVITA enables experimental evidence, computational models, parameter configurations, and simulation results to be systematically connected, shared, and reused.
+
+CIVITA is conceived as an open, community-driven platform that will evolve through scientific contributions and progressively support automated, reproducible, and objective assessments of concrete computational models.
+
+
+
+
+
+
+\input{working_group}
+
+\normalsize
+\chapter{CIVITA Vision and Architecture}
+
+
+\section{Scientific Vision and Guiding Principles}
+
+The long-term vision of CIVITA is to establish an open, collaborative scientific environment in which experimental evidence, computational models, parameter configurations, simulation results, and model assessment procedures are represented through structured, interoperable, and reusable scientific objects.
+
+CIVITA is founded on the principle that progress in computational modeling should be supported by systematic accumulation of evidence regarding the predictive capabilities and limitations of computational models. This requires transparent calibration procedures, rigorous validation against independent experimental observations, and reproducible comparisons among alternative modeling approaches and numerical implementations.
+
+The CIVITA Network is designed to be model-agnostic, accommodating different constitutive theories, discrete and continuum formulations, multiscale approaches, and numerical implementations. It does not prescribe preferred computational models but provides a common scientific framework within which their performance can be objectively assessed.
+
+Fundamental guiding principles include openness, scientific traceability, reproducibility, interoperability, and long-term preservation of scientific contributions. Experimental datasets, computational frameworks, parameter configurations, and assessment results should remain identifiable, versioned, and accessible for subsequent verification and reuse. Contributions should retain explicit provenance and review status, allowing the community to distinguish between submitted and independently assessed scientific evidence.
+
+Through these principles, CIVITA seeks to support cumulative scientific progress and strengthen the foundation for reliable predictive modeling of concrete materials and structures.
+
+
+
+\section{CIVITA Network Architecture}
+
+CIVITA is organized around two complementary scientific databases and three computational assessment modules, collectively providing an integrated environment for the systematic evaluation of concrete computational models. The overall architecture is illustrated in Fig.~\ref{fig:civita-architecture}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./figs/civita_scientific_architecture.png}
+    \caption{CIVITA scientific architecture, integrating experimental and computational databases with parameter identification, validation, and benchmarking environments.}
+    \label{fig:civita-architecture}
+\end{figure}
+
+The Experimental Database provides access to curated experimental observations and their associated metadata, while the Computational Database organizes computational models, numerical implementations, and related scientific information. Together, these databases establish the foundations for three complementary assessment activities: Parameter Identification, which determines model parameters through comparison with experimental evidence; Validation, which evaluates predictive capabilities against independent experimental observations; and Benchmarking, which supports systematic comparisons among computational models, numerical implementations, and successive software versions.
+
+The architecture is designed to support the exchange and reuse of scientific information across these components. Experimental datasets, computational framework definitions, parameter configurations, and simulation results can be referenced by multiple assessment activities while preserving their provenance and scientific context. This organization promotes consistency, reduces duplication, and enables cumulative assessments of computational model performance.
+
+Each CIVITA component is developed as a distinct functional environment with its own scientific objectives and data structures, while adhering to shared definitions and interoperability principles. This modular architecture allows individual components to evolve independently without compromising their integration within the broader network. The scientific roles of the five components are described in the following sections, while their interoperability and integration into computational workflows are discussed in Section~\ref{sec:civita-interoperability}.
