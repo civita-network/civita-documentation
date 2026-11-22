@@ -79,3 +79,69 @@ The Experimental Database provides access to curated experimental observations a
 The architecture is designed to support the exchange and reuse of scientific information across these components. Experimental datasets, computational framework definitions, parameter configurations, and simulation results can be referenced by multiple assessment activities while preserving their provenance and scientific context. This organization promotes consistency, reduces duplication, and enables cumulative assessments of computational model performance.
 
 Each CIVITA component is developed as a distinct functional environment with its own scientific objectives and data structures, while adhering to shared definitions and interoperability principles. This modular architecture allows individual components to evolve independently without compromising their integration within the broader network. The scientific roles of the five components are described in the following sections, while their interoperability and integration into computational workflows are discussed in Section~\ref{sec:civita-interoperability}.
+
+
+\section{Experimental Database}
+
+The CIVITA Experimental Database provides a structured and curated repository of experimental evidence relevant to the mechanical and physical behavior of concrete and cementitious materials. Its primary objective is to make experimental data systematically accessible, traceable, and reusable for computational model development, parameter identification, validation, and benchmarking.
+
+The database accommodates experimental investigations conducted at different spatial scales, ranging from material characterization to structural component testing, and addressing a broad range of physical phenomena, loading conditions, and environmental exposures. Each dataset is associated with information describing its original source, material composition, specimen geometry, reinforcement configuration, experimental setup, loading history, instrumentation, and measured responses. This information provides the scientific context necessary for interpreting experimental observations and reproducing the corresponding tests computationally.
+
+A central feature of the database is the adoption of standardized data structures, controlled vocabularies, and parametrization libraries. These facilitate the consistent representation of experimental information originating from different laboratories, research programs, and historical publications. Particular attention is devoted to preserving the provenance of experimental observations, including the distinction between directly reported measurements and data subsequently extracted, processed, or interpreted.
+
+The Experimental Database is conceived as an evolving community resource, incorporating both newly generated experimental data and existing datasets recovered from the scientific literature. By progressively assembling a broad and well-documented body of experimental evidence, it establishes a common scientific foundation for the systematic assessment of concrete computational models within CIVITA.
+
+
+\section{Computational Database}
+
+\noindent\textcolor{red}{\textbf{Draft -- Subject to revision during module development.}}
+
+The CIVITA Computational Database provides a structured environment for the registration, documentation, and management of computational frameworks used to simulate the mechanical and physical behavior of concrete and cementitious materials. Its primary objective is to establish a common, traceable, and reusable representation of computational methodologies, facilitating their systematic application, evaluation, and comparison within the CIVITA Network.
+
+A central concept of the Computational Database is the Computational Framework, defined through the combination of a concrete material model, numerical methods and algorithms, software implementation, and computational architecture. These components characterize the computational methodology independently of the particular simulation problem. Their explicit identification makes it possible to distinguish differences arising from the underlying physical and mathematical formulations from those associated with numerical algorithms and software implementations.
+
+The database maintains structured definitions of computational frameworks and their constituent components, including their scientific references, capabilities, relationships, and version histories. Registered definitions are assigned persistent identifiers, allowing computational frameworks and their specific versions to be referenced consistently across different CIVITA modules. This approach supports scientific traceability while enabling the progressive evolution of computational models and their implementations.
+
+The Computational Database provides the common scientific reference system for Parameter Identification, Validation, and Benchmarking. By associating computational results with explicitly identified and versioned frameworks, it enables reproducible assessments, comparisons among alternative modeling approaches, and systematic evaluation of the effects of software updates and numerical implementation choices.
+
+
+\section{Parameter Identification}
+\label{sec:civita-parameter-identification}
+
+\noindent\textcolor{red}{\textbf{Draft -- Subject to revision during module development.}}
+
+The CIVITA Parameter Identification Module provides an environment for determining the parameters of computational models through systematic comparison with experimental observations. It supports the definition and execution of calibration procedures using experimental datasets and computational frameworks registered within CIVITA.
+
+The module is intended to accommodate different parameter identification strategies, including optimization-based and probabilistic approaches, while preserving the information necessary to reproduce the calibration process. The resulting parameter configurations, together with their associated experimental references, computational frameworks, and calibration procedures, will constitute reusable scientific objects that can be employed in subsequent validation and benchmarking activities.
+
+
+\section{Validation}
+\label{sec:civita-validation}
+
+\noindent\textcolor{red}{\textbf{Draft -- Subject to revision during module development.}}
+
+The CIVITA Validation Module provides a systematic environment for assessing the predictive capabilities of computational models through comparison with independent experimental evidence. Its primary objective is to quantify the accuracy and reliability of model predictions under conditions that are distinct from those used for parameter identification.
+
+Validation activities will associate experimental datasets with specific computational frameworks and previously determined parameter configurations. Standardized assessment procedures and quantitative comparison metrics will support objective evaluations of predictive performance. The resulting validation records will contribute to establishing the capabilities, limitations, and domains of applicability of different computational models.
+
+
+\section{Benchmarking}
+\label{sec:civita-benchmarking}
+
+\noindent\textcolor{red}{\textbf{Draft -- Subject to revision during module development.}}
+
+The CIVITA Benchmarking Module provides a common environment for the systematic comparison of computational models and their numerical implementations through standardized simulation problems. Each benchmark defines a reproducible computational problem, including the relevant geometry, boundary conditions, loading history, and expected simulation outputs.
+
+The module is intended to support comparisons among successive versions of the same computational framework, different software implementations of the same mathematical model, and alternative computational frameworks based on different modeling approaches. Benchmark specifications and submitted simulation results will be preserved as traceable scientific records, enabling graphical comparisons, regression testing, and the progressive assessment of computational methodologies.
+
+
+\section{Interoperability and Integrated Scientific Workflows}
+\label{sec:civita-interoperability}
+
+\noindent\textcolor{red}{\textbf{Draft -- Subject to revision as the CIVITA architecture evolves.}}
+
+A fundamental objective of CIVITA is to enable the exchange and reuse of scientific information across its databases and computational assessment modules. This interoperability is based on shared scientific definitions, persistent identifiers, standardized data structures, and explicit relationships among experimental datasets, computational frameworks, parameter configurations, and simulation results.
+
+The long-term architecture envisions integrated scientific workflows in which experimental observations selected from the Experimental Database can be used for parameter identification, the resulting calibrated configurations can be transferred to validation exercises, and registered computational frameworks can be evaluated through standardized benchmarks. Scientific objects generated within one module should remain accessible and reusable by other modules while preserving their provenance, version information, and relationships to the original contributions.
+
+This integration is intended to facilitate increasingly automated and reproducible scientific workflows, allowing CIVITA to evolve into a connected environment for the cumulative assessment and improvement of concrete computational models.
