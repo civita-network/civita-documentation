@@ -1,0 +1,67 @@
+name: Sync geometry PDFs
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+# Serialize pushes with the existing documentation build.
+concurrency:
+  group: civita-documentation-pdf
+  queue: max
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out documentation
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: documentation
+
+      - name: Check out CIVITA Schema
+        uses: actions/checkout@v6
+        with:
+          repository: civita-network/civita-schema
+          ref: main
+          path: schema
+          persist-credentials: false
+
+      - name: Synchronize and publish PDFs
+        working-directory: documentation
+        shell: bash
+        run: |
+          shopt -s nullglob
+          updated_pdfs=()
+          for source in ../schema/figures/geometries/generated/*.pdf; do
+            [[ -f "$source" && ! -L "$source" ]] || continue
+            destination="figs/geometries/${source##*/}"
+            if [[ ! -L "$destination" ]] && cmp -s -- "$source" "$destination"; then
+              continue
+            fi
+
+            mkdir -p -- figs/geometries
+            cp -T --remove-destination -- "$source" "$destination"
+            updated_pdfs+=("$destination")
+          done
+
+          if ((${#updated_pdfs[@]} == 0)); then
+            echo "No new or changed geometry PDFs."
+            exit 0
+          fi
+
+          git --literal-pathspecs add -- "${updated_pdfs[@]}"
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync geometry PDFs from CIVITA Schema'
+          git push origin HEAD:refs/heads/main
