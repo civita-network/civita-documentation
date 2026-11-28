@@ -1,0 +1,29 @@
+\chapter{CIVITA Geometry Library Catalog}
+\label{app:geometry-library}
+
+
+\section{Introduction and Conventions}
+\label{sec:geometry-definitions}
+
+This catalog presents the standardized geometry definitions included in the CIVITA Geometry Library. Each geometry type is identified by a unique global identifier and version number and is characterized by a reference figure, a local right-handed Cartesian coordinate system, a set of independent geometric parameters, and, where applicable, derived parameters and geometric constraints.
+
+The definitions establish the geometric meaning, units, and admissible ranges of the parameters independently of their application to specific experimental specimens or computational models. Individual geometry instances are obtained by assigning numerical values to the independent parameters in accordance with the corresponding definition. Unless otherwise specified, geometric dimensions are expressed in millimeters.
+
+The following subsections document the seven geometry types currently available in the library, ordered by their global identifiers. The authoritative machine-readable specifications are maintained in the CIVITA common specifications repository (\texttt{civita-schema}). In case of discrepancies, the corresponding version of the authoritative JSON definition governs the interpretation of the geometry.
+
+
+
+\input{geometries/prism}
+
+\input{geometries/cube}
+
+\input{geometries/cylinder}
+
+\input{geometries/notched_prism}
+
+\input{geometries/dogbone}
+
+\input{geometries/ell_shape}
+
+\input{geometries/notched_cylinder}
+
