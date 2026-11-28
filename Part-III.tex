@@ -419,10 +419,19 @@ tools for concrete materials and structures.
 
 
 %============================================================
+\begingroup
+% Keep the hierarchy figure with its introduction on the opening page.
+\AddToHookNext{cmd/@makechapterhead/before}{\vspace*{-48pt}}
+\AddToHookNext{cmd/@makechapterhead/after}{\vspace{-20pt}}
 \chapter{Experimental Database: Data Model and Hierarchy}
 \label{chap:experimental-data-model}
 \chaptermark{Experimental Database: Data Model}
 %============================================================
+
+% Avoid single-line fragments and discourage two-line splits.
+\clubpenalties 3 10000 2500 0
+\widowpenalties 3 10000 2500 0
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
 \section{Overall Database Organization}
 
@@ -455,9 +464,9 @@ repeatedly storing identical information.
 The database hierarchy is illustrated in
 Fig.~\ref{fig:database_hierarchy}.
 
-\begin{figure}[htbp]
+\begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.9\linewidth]
+    \includegraphics[width=0.80\linewidth]
     {./figs/database_hierarchy.png}
     \caption{Hierarchical organization of the CIVITA
     Experimental Database, showing the relationships
@@ -468,6 +477,8 @@ Fig.~\ref{fig:database_hierarchy}.
     \label{fig:database_hierarchy}
 \end{figure}
 
+% Distribute extra space between paragraphs on pages with fewer lines.
+\setlength{\parskip}{0.5pt plus 2pt}
 The current data model comprises thirteen entity
 collections, organized around a common literature
 source and connected through explicitly defined
@@ -881,6 +892,7 @@ manufacturing parameters associated with
 additively manufactured concrete and
 cementitious specimens.
 
+\nopagebreak
 Additive manufacturing introduces
 process-dependent characteristics that
 may significantly influence the
@@ -1316,6 +1328,7 @@ identifiers to establish
 unambiguous relationships
 among its scientific entities.
 
+\nopagebreak
 Each record is associated
 with an identifier
 appropriate to its
@@ -1494,7 +1507,11 @@ and identifier management
 are discussed in
 Chapter~\ref{chap:experimental-curation}.
 
-
+\clearpage
+% Keep the book's right-hand chapter opening and leave the spacer unmarked.
+\pagestyle{empty}
+\cleardoublepage
+\endgroup
 
 
 %============================================================
