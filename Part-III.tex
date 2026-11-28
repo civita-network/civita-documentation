@@ -431,6 +431,7 @@ tools for concrete materials and structures.
 % Avoid single-line fragments and discourage two-line splits.
 \clubpenalties 3 10000 2500 0
 \widowpenalties 3 10000 2500 0
+\raggedbottom
 \setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
 \section{Overall Database Organization}
@@ -460,7 +461,6 @@ Representing these elements as separate but related
 entities makes it possible to preserve their scientific
 meaning and reconstruct their relationships without
 repeatedly storing identical information.
-
 The database hierarchy is illustrated in
 Fig.~\ref{fig:database_hierarchy}.
 
@@ -488,25 +488,21 @@ category.
 
 The hierarchy distinguishes three principal
 organizational levels.
-
 The first level establishes the scientific source
 and the reusable definitions associated with
 the experimental investigation. These include
 material batches, geometries, reinforcement systems,
 and additive manufacturing variables.
-
 The second level represents specimen configurations
 and experimental tests. Specimens associate reusable
 material and geometric definitions with specific
 experimental configurations, while tests describe
 the experimental procedures and conditions applied
 to those specimens.
-
 The third level contains information associated
 with individual tests, including devices and
 supports, loading histories, and experimental
 observations.
-
 This organization supports the representation of
 experimental programs involving multiple material
 mixtures, specimen configurations, testing conditions,
@@ -528,7 +524,6 @@ in Appendix~\ref{app:experimental-schema}.
 The database hierarchy is based on the distinction
 between scientific entities, their attributes,
 and the relationships connecting them.
-
 A scientific entity represents an identifiable
 component of an experimental investigation,
 such as a material batch, specimen configuration,
@@ -536,7 +531,6 @@ experimental test, or measured response.
 Its attributes describe the corresponding
 physical, geometric, procedural, or observational
 characteristics.
-
 Relationships establish how entities are
 associated within an experimental program.
 These relationships are represented through
@@ -547,14 +541,12 @@ organization of the experiment.
 A fundamental distinction is maintained between
 reusable definitions and entities associated
 with individual experimental procedures.
-
 For example, a geometry record describes
 a specimen configuration that may be referenced
 by several specimens. Similarly, a reinforcement
 material may be associated with multiple
 reinforcement components, and a material batch
 may be used for several specimen configurations.
-
 This approach avoids unnecessary duplication
 and ensures that information shared among
 multiple experimental records remains consistent.
@@ -566,7 +558,6 @@ layouts are associated with specimen geometries,
 reinforcement components reference reinforcement
 materials, and experimental data may be
 associated with specific measurement devices.
-
 These relationships are essential for preserving
 the scientific interpretation of experimental
 information. A measured displacement, for example,
@@ -582,7 +573,6 @@ repeated execution. This distinction permits
 multiple experimental repetitions to be
 represented without unnecessarily duplicating
 their common configuration.
-
 The individual entity collections and their
 principal relationships are described in the
 following sections.
@@ -593,19 +583,16 @@ following sections.
 The \texttt{literature\_sources} collection
 constitutes the highest organizational level
 of the Experimental Database.
-
 Each literature source represents an identifiable
 origin of experimental information, such as a
 journal publication, conference paper, technical
 report, dissertation, published dataset, or
 documented experimental campaign.
-
 A source record establishes the scientific
 provenance of the associated information and
 provides the common reference through which
 the corresponding material, specimen, test,
 and measurement records are organized.
-
 Relevant metadata may include bibliographic
 information, authorship, publication details,
 digital identifiers, and other descriptors
@@ -616,7 +603,6 @@ submission. Under the current database hierarchy,
 each submission contains exactly one source record,
 and all associated entity records belong to
 that same source.
-
 A single source may nevertheless contain
 multiple material batches, specimen configurations,
 experimental tests, and associated observations.
@@ -628,12 +614,10 @@ identification and classification of experimental
 information according to relevant scientific
 subjects, materials, phenomena, testing methods,
 and other characteristics.
-
 Unlike most other entity collections, individual
 keyword records are identified by their keyword
 values rather than by a numerical identifier
 with a dedicated prefix.
-
 Source-level metadata and keywords complement
 the more detailed scientific descriptors
 contained in the associated entity records.
@@ -648,12 +632,10 @@ information.
 The \texttt{material\_batches} collection
 describes the material systems investigated
 within an experimental source.
-
 A material batch represents a particular
 concrete mixture, cementitious composition,
 or other material system associated with
 the preparation and testing of specimens.
-
 Material batch records provide the principal
 connection between experimental observations
 and the composition and characteristics of
@@ -666,7 +648,6 @@ materials, aggregate characteristics,
 cementitious components, admixtures,
 fibers, and relevant preparation or
 processing conditions.
-
 Additional information may characterize
 the material state, preparation history,
 curing conditions, and other attributes
@@ -678,14 +659,12 @@ multiple material batches representing
 different mixture compositions or material
 systems. Each batch is assigned a distinct
 identifier within the corresponding source.
-
 A material batch may be referenced by
 multiple specimen records. Consequently,
 the same material definition can be
 associated with specimens having different
 geometries, reinforcement configurations,
 or manufacturing characteristics.
-
 This organization separates material
 characterization from specimen geometry
 and testing conditions, facilitating
@@ -708,11 +687,9 @@ quantities should remain traceable.
 The database distinguishes specimen geometry
 definitions from the specimen configurations
 in which they are used.
-
 The \texttt{geometries} collection contains
 reusable geometric configurations associated
 with an experimental source.
-
 Each geometry record identifies a geometry
 type and specifies the parameter values
 required to describe the corresponding
@@ -723,18 +700,15 @@ reference the shared CIVITA Geometry Library,
 which establishes standardized parameter
 names, coordinate systems, dimensional
 conventions, and geometric constraints.
-
 A distinction is therefore maintained
 between a globally defined geometry type
 and a source-specific geometry instance.
-
 The global definition establishes the
 scientific meaning of the parametrization,
 whereas the geometry instance specifies
 the numerical dimensions and other
 information associated with the particular
 experimental configuration.
-
 The shared geometry definitions are
 introduced in Chapter 6 and documented
 in Appendix~\ref{app:geometry-library}.
@@ -743,18 +717,15 @@ The \texttt{specimens} collection represents
 physical specimens or specimen families
 defined through associations with the
 corresponding material and geometric records.
-
 At a minimum, a specimen configuration
 references a material batch and a geometry.
 Additional relationships may identify a
 reinforcement layout or additive manufacturing
 variables when relevant.
-
 The specimen entity therefore provides
 the connection between the material
 characteristics and the physical
 configuration of the experimental object.
-
 For example, several specimens may share
 the same material batch while having
 different dimensions. Conversely, specimens
@@ -776,7 +747,6 @@ The interpretation depends on the
 information available from the source
 and the manner in which the associated
 experimental observations are reported.
-
 This distinction is particularly important
 when experimental results are provided
 as averages or statistical summaries
@@ -791,7 +761,6 @@ collections:
 \texttt{reinforcement\_materials},
 \texttt{reinforcement\_components}, and
 \texttt{reinforcement\_layouts}.
-
 The separation of these entities allows
 reinforcement material properties,
 individual reinforcing elements, and
@@ -805,14 +774,12 @@ The \texttt{reinforcement\_materials}
 collection defines the material
 characteristics associated with reinforcing
 systems.
-
 Depending on the reinforcement type,
 the corresponding records may describe
 material classification, mechanical
 properties, strength characteristics,
 elastic moduli, and other relevant
 constitutive or physical properties.
-
 A reinforcement material definition may
 be referenced by multiple reinforcement
 components, allowing consistent use of
@@ -826,7 +793,6 @@ collection represents individual
 reinforcement elements or groups of
 elements forming part of a complete
 reinforcement configuration.
-
 Examples include longitudinal reinforcing
 bar layers, stirrup sets, transverse
 ties, and externally applied reinforcement
@@ -835,12 +801,10 @@ systems.
 Each reinforcement component is associated
 with a reinforcement material definition
 and a reinforcement layout.
-
 A component combines material information
 with the geometric and spatial descriptors
 necessary to characterize its contribution
 to the reinforcement configuration.
-
 Such descriptors may include reinforcement
 dimensions, locations, orientations,
 spacings, and other parameters relevant
@@ -852,13 +816,11 @@ The \texttt{reinforcement\_layouts}
 collection represents complete
 reinforcement configurations assembled
 from individual reinforcement components.
-
 Each layout is associated with a
 geometry record and is defined with
 respect to the corresponding specimen
 coordinate system and geometric
 parametrization.
-
 This relationship ensures that the
 positions and orientations of
 reinforcement components can be
@@ -869,7 +831,6 @@ A reinforcement layout may include
 multiple components representing
 different reinforcement systems
 or reinforcement regions.
-
 The resulting layout can be referenced
 by multiple specimen records sharing
 the same geometric and reinforcement
@@ -891,15 +852,12 @@ provides a structured representation of
 manufacturing parameters associated with
 additively manufactured concrete and
 cementitious specimens.
-
-\nopagebreak
 Additive manufacturing introduces
 process-dependent characteristics that
 may significantly influence the
 mechanical and physical response of
 the resulting material or structural
 component.
-
 Relevant information may include
 printing speed, extrusion conditions,
 material flow, nozzle characteristics,
@@ -913,12 +871,10 @@ and specimen geometry, allowing
 manufacturing conditions to be
 associated explicitly with the
 resulting specimen configuration.
-
 A printing variables record may be
 referenced by multiple specimens
 manufactured using the same
 documented process conditions.
-
 The association is optional because
 printing variables are not applicable
 to conventionally cast or otherwise
@@ -931,7 +887,6 @@ of manufacturing effects and facilitates
 the comparison of additively manufactured
 specimens with conventional material
 and structural configurations.
-
 The corresponding scientific descriptors
 and field definitions are documented
 in Appendix~\ref{app:experimental-schema}.
@@ -942,7 +897,6 @@ in Appendix~\ref{app:experimental-schema}.
 The \texttt{tests} collection represents
 experimental testing configurations
 applied to specimens.
-
 A test record establishes the
 relationship between a specimen
 configuration and the experimental
@@ -956,7 +910,6 @@ environmental conditions, observed
 physical mechanisms, and other
 information required for interpreting
 the experimental response.
-
 Examples include uniaxial compression,
 direct tension, bending, shear,
 torsion, multiaxial loading, and
@@ -970,7 +923,6 @@ configuration to the devices and
 supports, loading histories, and
 experimental observations associated
 with the test.
-
 A single specimen configuration
 may be associated with multiple
 test records representing different
@@ -980,18 +932,15 @@ The current data model also allows
 a test definition to represent a
 configuration subjected to repeated
 experimental execution.
-
 Individual repetition results,
 as well as aggregate quantities
 obtained from multiple repetitions,
 may be represented through
 associated data records.
-
 This organization distinguishes
 the definition of the experimental
 procedure from the observations
 obtained through its execution.
-
 Such a distinction is important
 for experimental programs involving
 multiple nominally identical specimens,
@@ -1005,7 +954,6 @@ of experimental evidence associated
 with particular loading conditions,
 physical mechanisms, or specimen
 configurations.
-
 It also supports the reconstruction
 of computational boundary-value
 problems corresponding to the
@@ -1018,7 +966,6 @@ The \texttt{devices\_and\_supports}
 collection represents physical
 components associated with
 experimental test configurations.
-
 These components may include
 supports, loading platens,
 actuators, fixtures, sensors,
@@ -1026,11 +973,9 @@ instrumentation systems, and
 other devices relevant to
 the application or measurement
 of experimental conditions.
-
 Each device or support record
 is associated with an experimental
 test.
-
 The corresponding description
 may include device classification,
 geometry, location, orientation,
@@ -1043,7 +988,6 @@ of devices and supports is
 particularly important when
 their characteristics influence
 the observed mechanical response.
-
 For example, the dimensions
 and mechanical properties of
 loading platens, the configuration
@@ -1058,18 +1002,15 @@ Device records also establish
 references that can be used
 by loading histories and
 experimental data.
-
 A loading history may identify
 the actuator or other device
 through which a prescribed
 load or displacement is applied.
-
 Similarly, a measurement
 record may reference the
 instrumentation device
 associated with the observed
 quantity.
-
 These relationships allow
 the database to distinguish
 between quantities prescribed
@@ -1086,7 +1027,6 @@ When available, standardized
 definitions promote consistent
 interpretation across
 different experimental programs.
-
 Detailed scientific specifications
 and supported device types are
 addressed through the
@@ -1102,7 +1042,6 @@ prescribed loading protocols
 or loading time histories
 associated with experimental
 tests.
-
 A loading history record
 is linked to a test and
 may additionally reference
@@ -1118,14 +1057,12 @@ displacement-controlled,
 deformation-controlled,
 or other experimental
 loading procedures.
-
 Depending on the test,
 the prescribed history
 may involve monotonic,
 cyclic, sustained,
 transient, or otherwise
 time-dependent actions.
-
 The loading history
 representation may include
 the controlled quantity,
@@ -1134,7 +1071,6 @@ independent variable,
 and numerical data
 describing the prescribed
 evolution.
-
 Additional descriptors
 may characterize loading
 rates, amplitudes,
@@ -1146,7 +1082,6 @@ The distinction between
 loading histories and
 experimental data is
 fundamental.
-
 Loading histories
 describe prescribed
 actions or experimental
@@ -1155,7 +1090,6 @@ whereas data records
 describe observed,
 measured, or reported
 responses.
-
 For example, a prescribed
 actuator displacement
 history is represented
@@ -1164,7 +1098,6 @@ while the corresponding
 measured reaction force
 is represented as an
 experimental observation.
-
 When the actual applied
 history differs from
 its nominal prescription,
@@ -1172,7 +1105,6 @@ the corresponding measured
 information may also
 be preserved as
 experimental data.
-
 This separation facilitates
 the reconstruction of
 experimental boundary
@@ -1188,13 +1120,11 @@ The \texttt{data} collection
 contains the experimental
 observations associated
 with individual tests.
-
 It constitutes the principal
 representation of the
 measured and reported
 scientific evidence
 preserved in the database.
-
 Each data record is
 associated with a test
 and may optionally
@@ -1211,7 +1141,6 @@ data structures,
 depending on the
 nature of the
 reported information.
-
 These include scalar
 quantities, curves,
 time histories,
@@ -1219,7 +1148,6 @@ tables, images,
 videos, and
 multidimensional
 measurement fields.
-
 Scalar observations
 may describe quantities
 such as peak loads,
@@ -1228,7 +1156,6 @@ elastic moduli,
 fracture energies,
 or other experimentally
 determined characteristics.
-
 Curves and time histories
 may describe relationships
 among applied loads,
@@ -1236,7 +1163,6 @@ displacements, strains,
 temperatures, environmental
 conditions, or other
 measured quantities.
-
 Tabular data may
 provide collections
 of numerical results
@@ -1256,7 +1182,6 @@ or other observations
 relevant to the
 interpretation of
 experimental behavior.
-
 Multidimensional fields
 may include spatially
 distributed measurements
@@ -1272,7 +1197,6 @@ from a particular
 experimental repetition
 or statistical summaries
 of multiple repetitions.
-
 When statistical
 information is reported,
 the distinction among
@@ -1289,7 +1213,6 @@ associated test,
 specimen, material,
 and configuration
 records.
-
 For example, a
 load--displacement
 curve cannot be
@@ -1301,7 +1224,6 @@ loading conditions,
 and the locations
 or definitions of
 the measured quantities.
-
 This contextual
 representation supports
 the systematic comparison
@@ -1311,7 +1233,6 @@ programs and their
 subsequent use in
 computational model
 assessment.
-
 The representation
 of numerical data,
 associated files,
@@ -1327,13 +1248,10 @@ Database adopts standardized
 identifiers to establish
 unambiguous relationships
 among its scientific entities.
-
-\nopagebreak
 Each record is associated
 with an identifier
 appropriate to its
 entity collection.
-
 The current conventions
 include identifiers
 such as \texttt{SRC0001}
@@ -1349,7 +1267,6 @@ for tests, and
 \texttt{DAT0001}
 for experimental
 data records.
-
 Additional prefixes
 identify printing
 variables, reinforcement
@@ -1358,7 +1275,6 @@ components, reinforcement
 layouts, devices and
 supports, and loading
 histories.
-
 These identifiers
 establish references
 within the corresponding
@@ -1374,7 +1290,6 @@ records must reference
 that source through
 the \texttt{source\_id}
 field.
-
 Relationships among
 records must resolve
 within the same source,
@@ -1390,7 +1305,6 @@ is distinct from the
 scientific parent--child
 relationships among
 entities.
-
 For example, a
 specimen record is
 associated with its
@@ -1404,7 +1318,6 @@ both its source
 and the specimen
 configuration to
 which it applies.
-
 This distinction
 supports the explicit
 representation of
@@ -1421,7 +1334,6 @@ identify existing
 entities within
 the applicable
 scope.
-
 Required relationships
 must be present
 and valid, while
@@ -1441,7 +1353,6 @@ source-specific
 identifiers and
 globally defined
 scientific objects.
-
 For example,
 \texttt{GEO0001}
 identifies a geometry
@@ -1455,7 +1366,6 @@ identifies a shared
 parametrization
 definition maintained
 by the CIVITA Network.
-
 The geometry record
 references the
 corresponding global
@@ -1464,7 +1374,6 @@ version while retaining
 its own source-specific
 identifier and numerical
 parameter values.
-
 This separation
 allows shared
 scientific definitions
@@ -1483,7 +1392,6 @@ necessary to ensure
 persistent and
 unambiguous references
 across the CIVITA Network.
-
 The corresponding
 procedures must
 preserve the
