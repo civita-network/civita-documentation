@@ -1,0 +1,164 @@
+
+%============================================================
+\part{Shared Scientific Definitions and Standards}
+%============================================================
+
+
+
+%============================================================
+\chapter{Shared Scientific Concepts}
+%============================================================
+
+\section{Introduction and Scope}
+
+The CIVITA Network is designed to support the systematic integration, exchange, and reuse of scientific information across its experimental and computational databases and its parameter identification, validation, and benchmarking modules. Achieving this objective requires a common conceptual framework that ensures consistent interpretation of scientific information independently of the module in which it originates or is subsequently used.
+
+This chapter introduces the fundamental scientific concepts shared across CIVITA, including the representation of scientific objects, their relationships, and the principles governing identification, provenance, and versioning. These concepts provide the foundation for interoperability among CIVITA components while allowing each module to maintain its own specialized data structures, scientific methodologies, and operational procedures.
+
+The definitions presented here establish general principles applicable throughout the network. Detailed specifications, including entity-specific metadata, validation requirements, and implementation procedures, are provided in the corresponding technical sections of this documentation.
+
+\section{Scientific Objects and Their Relationships}
+
+CIVITA organizes scientific information through identifiable and reusable \emph{scientific objects}. A scientific object is a structured representation of an experimental, computational, or methodological entity that has a defined scientific meaning and can be referenced, exchanged, or reused within the network.
+
+Examples of scientific objects include experimental datasets, material and specimen definitions, computational frameworks, model parameter configurations, calibration procedures, validation exercises, benchmark specifications, and simulation results. Depending on their nature, these objects may contain descriptive metadata, numerical parameters, references to external data files, or relationships to other scientific objects.
+
+A fundamental architectural principle is the separation between reusable scientific definitions and their application to specific experimental or computational activities. For example, a computational framework defines a particular modeling methodology and its implementation, whereas an individual simulation specifies the parameter values, numerical settings, and problem configuration used in a particular analysis. Similarly, a standardized geometry definition establishes a parametrization scheme, while a geometry instance specifies the dimensions of a particular specimen or computational domain.
+
+Scientific objects may be related through explicitly defined associations. An experimental test may reference a material batch and specimen geometry; a parameter identification exercise may reference experimental observations and a computational framework; and a validation exercise may reference a previously calibrated parameter configuration and independent experimental data. These relationships preserve the scientific context of individual contributions and enable their reuse across different CIVITA modules.
+
+The representation of scientific objects is intended to minimize unnecessary duplication while supporting modularity and extensibility. Individual modules may introduce specialized object types and relationships, provided that their interactions with shared CIVITA resources remain consistent with the common scientific framework.
+
+\section{Identification, Provenance, and Versioning}
+
+Scientific traceability requires that CIVITA objects remain unambiguously identifiable and that their origins, relationships, and evolution can be reconstructed. To achieve this objective, the network adopts common principles for persistent identification, provenance tracking, and version management.
+
+\paragraph{Identification.}
+Scientific objects are associated with identifiers that distinguish them from other objects of the same category. These identifiers enable references across different modules and support the maintenance of explicit relationships among experimental datasets, computational frameworks, parameter configurations, and assessment results. The detailed identifier formats and naming conventions are defined in the following chapter and in the specifications of individual CIVITA components.
+
+\paragraph{Provenance.}
+Each scientific object should preserve sufficient information to establish its origin and scientific context. Depending on the object type, provenance information may include literature references, contributors, experimental sources, computational methodologies, software versions, data extraction procedures, and relationships to previously registered objects. Particular attention is given to distinguishing original scientific contributions from information obtained through subsequent processing, interpretation, or computational analysis.
+
+\paragraph{Versioning.}
+CIVITA is conceived as an evolving scientific infrastructure in which definitions, datasets, models, and computational procedures may be progressively revised or extended. Versioning provides a mechanism for documenting this evolution while preserving the reproducibility of previous scientific activities. Published scientific records should remain traceable to the specific definitions and configurations used at the time of their creation. Subsequent corrections or modifications should be documented without compromising the identification and interpretation of earlier records.
+
+Together, identification, provenance, and versioning establish the foundation for reproducible scientific workflows and cumulative assessments of computational model performance. Their implementation may differ among CIVITA components according to the nature of the corresponding scientific objects, while adhering to the common principles established at the network level.
+
+
+
+%============================================================
+\chapter{Common Scientific Conventions}
+%============================================================
+
+\section{Naming and Identifier Conventions}
+
+CIVITA adopts standardized naming and identification conventions to ensure consistency, machine readability, and interoperability across its scientific databases and computational modules. These conventions facilitate the unambiguous representation of scientific entities, their relationships, and the associated metadata, while supporting automated data processing, validation, and exchange.
+
+Machine-readable names for entities, attributes, and parameters generally follow a lowercase, underscore-separated convention (\texttt{snake\_case}). Names should be descriptive, scientifically meaningful, and consistent across CIVITA components whenever they represent the same concept. Established scientific symbols, standard designations, and terminology may retain their conventional notation when appropriate.
+
+Scientific entities are identified through structured identifiers associated with their respective categories. For example, the Experimental Database adopts identifiers such as \texttt{SRC0001} for literature sources, \texttt{BAT0001} for material batches, \texttt{GEO0001} for geometries, \texttt{SPC0001} for specimens, and \texttt{TST0001} for experimental tests. Similar conventions may be adopted by other CIVITA components to identify computational frameworks, parameter configurations, validation exercises, and benchmark specifications.
+
+Identifiers must be interpreted within their defined scope. Identifiers assigned during data submission may be local to the submitted dataset, whereas persistent identifiers assigned to registered scientific objects must ensure unambiguous referencing within the CIVITA Network. The specific identifier formats, uniqueness requirements, and registration procedures are defined in the corresponding module specifications.
+
+Once assigned to a published scientific object, a persistent identifier should remain stable. Changes to the object's definition or content must be managed through the applicable versioning procedures, preserving the integrity of existing references and the traceability of previous scientific activities.
+
+
+\section{Units and Coordinate Systems}
+
+The consistent interpretation of physical quantities requires explicit conventions for units, coordinate systems, and sign definitions. CIVITA adopts the International System of Units (SI) as the general reference system, while allowing the use of scientifically established engineering units and their multiples, provided that the units are explicitly specified and unambiguously interpretable.
+
+Dimensional quantities must be associated with their corresponding units, either through individual metadata fields or through clearly defined conventions applicable to the relevant data structure. Examples of commonly used units include \texttt{mm} and \texttt{m} for length, \texttt{N} and \texttt{kN} for force, \texttt{MPa} and \texttt{GPa} for stress and elastic moduli, and \texttt{s}, \texttt{min}, \texttt{h}, and \texttt{days} for time. Dimensionless parameters should be explicitly identified as such.
+
+Conversions between compatible units should preserve the physical meaning and numerical precision of the original information. When experimental data are reported using nonstandard or alternative units, the original units should remain identifiable to ensure traceability to the source.
+
+Spatial information is represented through explicitly defined coordinate systems. Unless otherwise specified, CIVITA adopts right-handed Cartesian coordinate systems with axes denoted by $x$, $y$, and $z$. The location of the origin, axis orientations, and interpretation of geometric parameters must be defined consistently with the corresponding scientific object or parametrization library.
+
+Local coordinate systems may be associated with specimen geometries, reinforcement components, experimental devices, or computational models. When multiple coordinate systems are involved, their relationships must be documented sufficiently to enable consistent interpretation and transformation of spatial quantities.
+
+Sign conventions for quantities such as displacement, rotation, force, stress, and strain must also be specified whenever ambiguity may arise. In particular, conventions adopted for experimental measurements and computational outputs should be documented to support meaningful comparisons between observed and predicted responses.
+
+
+\section{Data Representation and Exchange Principles}
+
+CIVITA adopts structured, machine-readable representations to facilitate the exchange and reuse of scientific information across its components. The underlying principle is the separation of scientific meaning from the particular software applications, storage technologies, or computational environments used to create and process the information.
+
+Scientific objects are represented through structured metadata describing their identity, properties, relationships, and provenance. Depending on their nature, these objects may also reference numerical datasets, images, videos, simulation outputs, or other associated files. This separation between metadata and scientific data supports efficient storage, extensibility, and interoperability.
+
+JSON-based representations provide a common mechanism for exchanging structured scientific information, including object definitions, metadata, parameter configurations, and references to related entities. Formal schemas and controlled vocabularies establish the permitted structure, data types, terminology, and validation requirements associated with these representations.
+
+Numerical data may be stored using formats appropriate to their dimensionality, structure, and size. For example, CSV files provide a straightforward representation of tabular data and experimental curves, while HDF5 and other suitable scientific formats may be used for large multidimensional datasets. The choice of storage format should preserve numerical accuracy, relevant metadata, and the information necessary for scientific interpretation.
+
+Interoperability requires more than compatibility between file formats. Exchanged scientific information must retain consistent definitions of physical quantities, units, coordinate systems, identifiers, and relationships among scientific objects. In particular, the same physical or computational quantity should have a consistent interpretation when transferred between different CIVITA components.
+
+The detailed schemas, supported data formats, validation rules, and exchange procedures are defined within the corresponding module specifications. These may evolve as the CIVITA infrastructure develops, while preserving the common scientific conventions established in this chapter.
+
+
+
+
+%============================================================
+\chapter{Shared Parametrization Libraries}
+%============================================================
+
+\section{Purpose and General Principles}
+
+The CIVITA Network adopts shared parametrization libraries to support the consistent representation of scientific entities across its experimental and computational components. These libraries provide standardized definitions of entities that can be described through a finite set of parameters, geometric conventions, and associated metadata.
+
+The primary objective of the parametrization libraries is to establish common scientific representations that are independent of individual experimental datasets, computational models, and software implementations. By adopting shared definitions, CIVITA reduces ambiguities arising from heterogeneous terminology and facilitates the interpretation, comparison, and reuse of scientific information across different applications.
+
+Each library consists of a collection of reusable definitions, referred to as \emph{library entries}, that specify the parameters and conventions required to represent a particular class of scientific entities. A fundamental distinction is maintained between a library entry, which establishes a general parametrization, and an individual instance, which assigns specific parameter values to represent a particular experimental or computational configuration.
+
+The parametrization libraries are designed to be extensible and versioned. Their authoritative machine-readable definitions are maintained in the CIVITA common specifications repository, allowing individual modules to reference shared definitions while retaining responsibility for their application-specific data structures.
+
+\section{Geometry Parametrization Library}
+
+\subsection{Scope and Applications}
+
+The CIVITA Geometry Library provides standardized parametric definitions of geometries relevant to experimental investigations and computational simulations of concrete materials and structures. It establishes a common geometric reference system that can be used to describe physical specimens, structural components, and computational domains.
+
+The library accommodates different classes of geometries, ranging from simple specimens, such as cubes, cylinders, and prisms, to more complex configurations involving notches and other geometric features. Its extensible structure allows additional definitions to be introduced as new experimental configurations and computational applications are considered.
+
+A shared geometry definition can be referenced by multiple CIVITA components. For example, a geometry used to describe an experimental specimen may also be employed to define the corresponding computational model or a standardized benchmarking problem. This common representation facilitates the consistent interpretation of dimensions, geometric features, and spatial relationships.
+
+\subsection{Geometry Definition Structure}
+
+Each geometry type is represented by a structured library entry that specifies its scientific identity, parametrization, and reference coordinate system. The definition includes a unique global geometry type identifier, a version designation, a descriptive name, the required geometric parameters, and the conventions necessary for their interpretation.
+
+Individual parameters are characterized by their names, definitions, data types, units, and applicable constraints. Depending on the geometry, the library may also specify derived parameters and geometric relationships that must be satisfied to obtain a valid configuration.
+
+A distinction is maintained between the global definition of a geometry type and its application to a particular specimen or computational problem. The library establishes the meaning of the parameters, whereas an individual geometry instance specifies their numerical values and any additional context-specific information.
+
+Geometry instances reference the corresponding global geometry type identifier and version. This ensures that the interpretation of their parameters remains traceable to a specific scientific definition, even as the library evolves.
+
+The complete catalog of supported geometry types, including their parametrizations and reference figures, is provided in Appendix~\ref{app:geometry-library}.
+
+\subsection{Coordinate Systems and Parameters}
+
+Each geometry definition establishes a local right-handed Cartesian coordinate system with axes denoted by $x$, $y$, and $z$. The location of the origin and the positive directions of the axes are specified through a textual description and an accompanying reference figure.
+
+Geometric parameters are defined with respect to this coordinate system. They may represent lengths, widths, thicknesses, diameters, offsets, notch dimensions, or other quantities necessary to characterize the geometry. Dimensional parameters are associated with explicit units, with millimeters adopted as the default length unit in the current Geometry Library.
+
+Reference figures form an integral part of the geometric definitions. They illustrate the coordinate conventions and the interpretation of individual parameters, particularly for geometries involving asymmetric features, offsets, or other potentially ambiguous configurations.
+
+The parametrization may also include constraints required to ensure geometric consistency. Such constraints may prescribe positive dimensions, admissible parameter ranges, or relationships among geometric quantities. Derived parameters may be introduced when their values follow uniquely from the independent parameters.
+
+The adopted conventions are intended to ensure that a given set of parameter values corresponds to an unambiguously defined geometry, independently of the software used for its visualization or computational representation.
+
+\subsection{Extensibility and Versioning}
+
+The CIVITA Geometry Library is designed to evolve progressively as additional experimental configurations and computational applications are introduced. New geometry types may be proposed when existing parametrizations are insufficient to represent a particular configuration adequately.
+
+Each proposed definition should establish a scientifically meaningful parametrization, specify its coordinate system and geometric constraints, and provide a corresponding reference illustration. Whenever possible, new definitions should follow existing naming and parametrization conventions to promote consistency across the library.
+
+Geometry definitions are versioned to preserve the scientific interpretation of previously registered instances. Once formally released, a geometry type version constitutes an immutable reference. Modifications that change the interpretation of its parameters, coordinate conventions, or associated reference figures require publication of a new version.
+
+The authoritative machine-readable definitions and reference figures are maintained together in the CIVITA common specifications repository. This arrangement ensures that geometry descriptions and their graphical representations can be associated with the same version of the scientific specification.
+
+\section{Other Shared Parametrization Libraries}
+
+In addition to the Geometry Library, CIVITA may adopt shared parametrization libraries for other scientific entities whose standardized representation is relevant across multiple components of the network.
+
+Potential applications include the parametrization of reinforcement configurations, experimental and computational boundary conditions, loading arrangements, and devices or supports. The extent to which these definitions should be shared across CIVITA modules will depend on their scientific applicability and the requirements of the corresponding data structures.
+
+The development of additional shared libraries will follow the same general principles established for geometry definitions, including explicit parameter definitions, consistent conventions, extensibility, and version management.
+
+Detailed specifications of these libraries will be introduced progressively as the corresponding CIVITA components are developed and their common scientific requirements are established.
