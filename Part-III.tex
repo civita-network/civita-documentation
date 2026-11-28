@@ -4,50 +4,1497 @@
 \label{part:experimental-database}
 %============================================================
 
-\chapter{Experimental Database: Scientific Objectives and Principles}
+
+%============================================================
+%\chapter{Experimental Database: Scientific Objectives and Principles}
+%\label{chap:experimental-objectives}
+%============================================================
+
+\chapter[Experimental Database: Scientific Objectives and Principles]
+{Experimental Database: Scientific Objectives and Principles}
+\chaptermark{Experimental Database}
 \label{chap:experimental-objectives}
+
 
 \section{Introduction and Scope}
 
+The CIVITA Experimental Database is a community-driven scientific
+resource dedicated to the systematic collection, documentation,
+curation, preservation, and dissemination of experimental data
+on concrete and cementitious materials. Its primary purpose is
+to establish a comprehensive and reliable body of experimental
+evidence that can support the development, calibration, validation,
+and objective assessment of computational models.
+
+Experimental investigations of concrete materials and structures
+have generated an extensive body of scientific information over
+several decades. However, much of this information remains
+distributed across journal publications, technical reports,
+dissertations, institutional repositories, and laboratory archives.
+Experimental results are frequently reported using heterogeneous
+terminology, incomplete metadata, different measurement conventions,
+and inconsistent formats. In many cases, the information required
+to reproduce an experiment computationally is difficult to retrieve
+or reconstruct.
+
+These limitations significantly reduce the potential value of
+existing experimental evidence. Even when numerical results are
+available, their interpretation often requires additional
+information concerning material composition, specimen preparation,
+geometry, reinforcement configuration, environmental conditions,
+boundary conditions, loading histories, and measurement procedures.
+The absence of such information may prevent meaningful comparisons
+between experimental observations and computational predictions.
+
+The CIVITA Experimental Database addresses these challenges through
+a standardized framework for representing experimental information
+and the relationships among its constituent elements. The database
+is intended to accommodate investigations conducted at different
+spatial and structural scales, from material characterization
+to the experimental assessment of structural components and
+systems. Its scope includes mechanical, physical, thermal,
+hygral, chemical, and other phenomena relevant to the behavior
+and durability of concrete and cementitious materials.
+
+The database accommodates both newly generated experimental
+information and existing datasets recovered from the scientific
+literature. Experimental observations may include scalar
+measurements, curves, time histories, tabular data, images,
+videos, and multidimensional fields. Each dataset is accompanied
+by structured metadata providing the scientific context
+necessary for its interpretation and reuse.
+
+The database architecture and scientific conventions are
+defined independently of the applications used to contribute,
+curate, or retrieve experimental information. The corresponding
+data model, representation standards, submission procedures,
+curation processes, and search capabilities are documented
+in the subsequent chapters of this Part.
+
+
 \section{Scientific Objectives}
+
+The principal scientific objective of the CIVITA Experimental
+Database is to transform distributed and heterogeneous experimental
+information into a structured, traceable, and reusable collection
+of scientific evidence.
+
+This objective is pursued through several complementary goals.
+
+First, the database seeks to preserve experimental observations
+together with sufficient contextual information to support
+their scientific interpretation. Material characteristics,
+specimen configurations, experimental procedures, environmental
+conditions, and measured responses are represented as related
+scientific entities rather than isolated data records. This
+organization facilitates the reconstruction of experimental
+conditions and the preparation of corresponding computational
+simulations.
+
+Second, the database promotes consistency in the representation
+of experimental information through shared scientific definitions,
+controlled vocabularies, standardized parametrizations, explicit
+units, and machine-readable metadata. These conventions reduce
+ambiguity and enable meaningful comparisons among datasets
+originating from different laboratories, experimental programs,
+and reporting practices.
+
+Third, the database aims to facilitate the discovery and
+systematic selection of experimental evidence. Researchers
+should be able to identify datasets satisfying specific
+requirements concerning materials, specimen dimensions,
+reinforcement characteristics, experimental conditions,
+observed phenomena, and measured quantities. Such capabilities
+are essential for assembling experimental datasets suitable
+for calibration, validation, and comparative model assessment.
+
+Fourth, the database provides the experimental foundation
+for reproducible computational modeling workflows. Experimental
+observations and their associated metadata should be accessible
+through structured representations that can be interpreted
+and processed by computational tools with minimal ambiguity.
+This includes the ability to connect experimental records
+with model parameter identification procedures, independent
+validation exercises, and other CIVITA scientific objects.
+
+Finally, the database seeks to preserve experimental knowledge
+over time and facilitate its cumulative expansion through
+community contributions. This includes recovering valuable
+historical datasets, documenting newly generated experimental
+evidence, correcting or extending existing records, and
+progressively improving the completeness and quality of
+available scientific information.
+
 
 \section{Guiding Principles}
 
+The design and development of the CIVITA Experimental Database
+are guided by scientific principles intended to ensure rigor,
+transparency, interoperability, and long-term usability.
+The database is conceived in accordance with the FAIR data
+principles, according to which scientific information should
+be Findable, Accessible, Interoperable, and Reusable.
+
+These principles are implemented through the following
+interrelated requirements.
+
+\paragraph{Findability.}
+
+Experimental information is organized through standardized
+identifiers, structured metadata, controlled vocabularies,
+and explicit relationships among scientific entities.
+These features support indexing, parameter-based searches,
+and the identification of experimental records satisfying
+specified scientific criteria. Findability extends to
+individual experimental tests and associated observations,
+allowing users to discover relevant evidence within larger
+experimental programs.
+
+\paragraph{Accessibility.}
+
+The database is intended to provide systematic access to
+experimental metadata and associated scientific data,
+subject to applicable access and redistribution conditions.
+Structured records and references to supporting files
+facilitate retrieval and interpretation without requiring
+users to reconstruct their relationships manually.
+The adopted representations are designed to remain
+independent of any particular user interface or
+storage technology.
+
+\paragraph{Interoperability.}
+
+Experimental information is represented through consistent
+scientific definitions, explicit units, standardized
+parametrization schemes, controlled vocabularies, and
+machine-readable schemas. These conventions enable data
+exchange among different CIVITA components and facilitate
+integration with external computational and analytical tools.
+
+\paragraph{Reusability.}
+
+Experimental datasets are documented with sufficient
+information to support scientific applications beyond
+those originally considered by their authors. Reusability
+requires preservation of experimental context, clear
+definitions of reported quantities, explicit provenance,
+and consistent representation of data and metadata.
+Particular emphasis is placed on supporting computational
+model development, parameter identification, validation,
+uncertainty quantification, and comparative assessments.
+
+\paragraph{Scientific traceability.}
+
+Experimental information must remain traceable to its
+original source and, where applicable, to the procedures
+used for extraction, interpretation, transformation,
+and curation. This requirement is especially important
+when experimental observations are recovered from
+published figures or tables rather than obtained
+directly from original laboratory records.
+
+\paragraph{Extensibility.}
+
+The database is designed to accommodate new materials,
+experimental methods, physical phenomena, measurement
+technologies, and data representations. Its scientific
+definitions and controlled vocabularies may evolve
+through documented extensions and revisions while
+preserving the interpretation of previously registered
+scientific information.
+
+\paragraph{Separation of scientific definitions and data.}
+
+The scientific meaning of experimental entities,
+parameters, and relationships is established through
+shared specifications independently of the applications
+and technologies used to store or process individual
+datasets. Structured metadata describe experimental
+information and provide references to associated
+scientific data, allowing the database infrastructure
+to evolve without altering the underlying scientific
+definitions.
+
+
 \section{Data Provenance, Traceability, and Quality}
+
+The scientific value of experimental information depends
+on the reliability of the observations and on the
+completeness and accuracy of the documentation describing
+the conditions under which they were obtained.
+
+The CIVITA Experimental Database therefore places particular
+emphasis on preserving the provenance of experimental
+data throughout their acquisition, extraction, processing,
+curation, and subsequent reuse.
+
+Each contributed dataset is associated with an identifiable
+scientific source, which may correspond to a publication,
+technical report, dissertation, experimental program,
+or another documented source of experimental evidence.
+Where available, bibliographic information, digital
+identifiers, and references to original figures, tables,
+or supplementary materials should be preserved.
+
+A distinction is maintained between experimental information
+reported directly by the original investigators and
+information subsequently extracted, reconstructed,
+processed, or interpreted by data contributors. For
+example, numerical values obtained by digitizing a
+published load--displacement curve may differ from
+the original measurements because of graphical resolution,
+digitization procedures, and other sources of uncertainty.
+The method used to obtain such values should therefore
+be documented whenever possible.
+
+Similarly, derived quantities should be distinguishable
+from directly measured quantities, and any transformations
+or assumptions introduced during data processing should
+remain identifiable. This distinction is essential for
+avoiding the attribution of uncertainties associated with
+data reconstruction to the underlying experiment.
+
+Data quality is considered through several complementary
+dimensions, including completeness, consistency, traceability,
+and scientific plausibility. Completeness concerns the
+availability of information required to interpret an
+experimental observation. Consistency concerns agreement
+among related records, units, identifiers, and reported
+quantities. Traceability concerns the ability to recover
+the origin and processing history of the information.
+Scientific plausibility concerns the compatibility of
+the reported data with the documented experimental
+configuration and established physical constraints.
+
+The database accommodates datasets with different levels
+of completeness, particularly when recovering historical
+experimental results for which some information is no
+longer available. Missing information should be explicitly
+distinguished from quantities that are not applicable
+or were not measured. Unreported values should not
+be replaced by assumptions or estimates without
+appropriate documentation.
+
+Automated validation can identify structural inconsistencies,
+missing required fields, invalid parameter values,
+and violations of prescribed relationships. However,
+compliance with a machine-readable schema does not
+establish the scientific correctness of experimental data.
+Scientific review remains necessary to assess the
+credibility of extracted information and the suitability
+of the associated documentation.
+
+The procedures governing automated validation, scientific
+review, correction, and publication are discussed in
+Chapter~\ref{chap:experimental-curation}.
+
 
 \section{Community Contributions and Scientific Reuse}
 
+The CIVITA Experimental Database is conceived as a
+collaborative scientific resource whose long-term
+value depends on sustained contributions from the
+concrete research community.
+
+Contributions may originate from researchers providing
+data generated through ongoing experimental programs,
+from investigators sharing previously collected
+laboratory datasets, or from contributors recovering
+experimental information reported in existing scientific
+publications.
+
+The systematic recovery of historical experimental
+evidence is particularly important. A substantial
+fraction of experimental knowledge relevant to concrete
+mechanics and structural behavior is available only
+through published figures, tables, and descriptive
+information. When adequately documented, these
+observations can provide valuable evidence for the
+assessment of computational models, including
+phenomena and experimental configurations that
+may be difficult or costly to reproduce.
+
+The database adopts a common scientific representation
+independently of the method used to prepare a contribution.
+Data submission procedures may involve direct manual
+entry, manual extraction and digitization, or
+AI-assisted extraction and preparation. All modalities
+are intended to produce information conforming to
+the same scientific specifications and validation
+requirements.
+
+AI-assisted procedures may facilitate the recovery
+of information from scientific publications and the
+organization of complex experimental records. Their
+use nevertheless requires careful verification,
+particularly when extracting numerical measurements,
+interpreting experimental configurations, or identifying
+relationships among scientific entities. The provenance
+of extracted data and the responsibility for reviewing
+their scientific accuracy remain essential regardless
+of the submission modality.
+
+The database also supports community-driven development
+of its scientific specifications. Contributors may
+identify limitations in existing definitions or
+propose additional material descriptors, experimental
+configurations, parametrization schemes, controlled
+vocabulary entries, and measurement types.
+
+Such extensions should be evaluated for scientific
+consistency and compatibility with existing definitions
+before their incorporation into the authoritative
+specifications.
+
+Scientific reuse is encouraged through the preservation
+of source attribution, explicit metadata, and
+machine-readable relationships among experimental
+entities. Researchers using CIVITA datasets remain
+responsible for evaluating their suitability for
+the intended scientific application and for
+acknowledging the original sources and applicable
+contributions.
+
+The data submission procedures are described in
+Chapter~\ref{chap:experimental-submission}, while
+the search and retrieval capabilities are discussed
+in Chapter~\ref{chap:experimental-search}.
+
+
 \section{Relationship with Other CIVITA Components}
+
+The Experimental Database constitutes the principal
+repository of physical evidence within the CIVITA
+Network. Its scientific value is enhanced by its
+interoperability with the Computational Database
+and the Parameter Identification, Validation, and
+Benchmarking modules.
+
+Within the Parameter Identification environment,
+experimental datasets provide the observations
+used to determine model parameters. The structured
+representation of experimental configurations,
+measured quantities, and associated conditions
+facilitates the definition of calibration problems
+and the comparison between observed and simulated
+responses.
+
+Within the Validation environment, experimental
+data provide the independent evidence required
+to assess the predictive capability of previously
+calibrated computational models. Traceable experimental
+records make it possible to document the conditions
+under which comparisons are performed and to
+distinguish uncertainties associated with experimental
+observations from discrepancies attributable to
+computational predictions.
+
+The Computational Database provides the complementary
+representation of the mathematical models, numerical
+implementations, parameter configurations, and
+simulation results used to interpret experimental
+evidence. Interoperability between the two databases
+supports consistent associations between experimental
+configurations and their computational counterparts.
+
+The Benchmarking environment is primarily concerned
+with standardized computational problems and the
+comparison of numerical results. Experimental evidence
+may contribute to the scientific motivation and
+definition of selected benchmarks, although
+benchmarking exercises do not necessarily require
+direct comparison with experimental observations.
+
+The integration of these components is intended to
+support traceable scientific workflows in which
+experimental information can be selected, transferred,
+interpreted, and reused without repeatedly reconstructing
+its underlying scientific context.
+
+By providing structured and persistent experimental
+evidence, the CIVITA Experimental Database establishes
+a foundation for cumulative model assessment and
+the progressive development of reliable predictive
+tools for concrete materials and structures.
 
 
 %============================================================
 \chapter{Experimental Database: Data Model and Hierarchy}
 \label{chap:experimental-data-model}
+\chaptermark{Experimental Database: Data Model}
 %============================================================
 
 \section{Overall Database Organization}
 
+The CIVITA Experimental Database adopts a hierarchical data
+model designed to represent experimental investigations
+through interconnected scientific entities. The hierarchy
+preserves the relationships among experimental sources,
+material systems, specimen configurations, testing
+procedures, and measured responses, while minimizing
+redundancy and supporting the systematic reuse of
+scientific information.
+
+The underlying principle is the decomposition of an
+experimental investigation into logically distinct
+components, each representing a specific aspect of
+the experimental program. For example, a single
+material batch may be used to manufacture several
+specimens with different geometries, while specimens
+with identical configurations may be subjected to
+different experimental tests. Similarly, a single
+test may produce multiple experimental observations,
+including scalar quantities, load--displacement curves,
+time histories, and full-field measurements.
+
+Representing these elements as separate but related
+entities makes it possible to preserve their scientific
+meaning and reconstruct their relationships without
+repeatedly storing identical information.
+
+The database hierarchy is illustrated in
+Fig.~\ref{fig:database_hierarchy}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]
+    {./figs/database_hierarchy.png}
+    \caption{Hierarchical organization of the CIVITA
+    Experimental Database, showing the relationships
+    among scientific sources, material batches,
+    geometries, specimens, reinforcement systems,
+    experimental tests, devices and supports,
+    loading histories, and experimental observations.}
+    \label{fig:database_hierarchy}
+\end{figure}
+
+The current data model comprises thirteen entity
+collections, organized around a common literature
+source and connected through explicitly defined
+relationships. Each collection contains records
+representing entities of the corresponding scientific
+category.
+
+The hierarchy distinguishes three principal
+organizational levels.
+
+The first level establishes the scientific source
+and the reusable definitions associated with
+the experimental investigation. These include
+material batches, geometries, reinforcement systems,
+and additive manufacturing variables.
+
+The second level represents specimen configurations
+and experimental tests. Specimens associate reusable
+material and geometric definitions with specific
+experimental configurations, while tests describe
+the experimental procedures and conditions applied
+to those specimens.
+
+The third level contains information associated
+with individual tests, including devices and
+supports, loading histories, and experimental
+observations.
+
+This organization supports the representation of
+experimental programs involving multiple material
+mixtures, specimen configurations, testing conditions,
+and measured responses within a consistent data
+structure.
+
+The scientific definitions and relationships
+described in this chapter are independent of
+the applications used for data submission,
+curation, storage, or retrieval. The corresponding
+machine-readable specifications are maintained
+in the CIVITA Experimental Database Schema repository,
+while detailed field definitions are documented
+in Appendix~\ref{app:experimental-schema}.
+
+
 \section{Scientific Entities and Their Relationships}
+
+The database hierarchy is based on the distinction
+between scientific entities, their attributes,
+and the relationships connecting them.
+
+A scientific entity represents an identifiable
+component of an experimental investigation,
+such as a material batch, specimen configuration,
+experimental test, or measured response.
+Its attributes describe the corresponding
+physical, geometric, procedural, or observational
+characteristics.
+
+Relationships establish how entities are
+associated within an experimental program.
+These relationships are represented through
+identifiers that connect individual records,
+allowing the database to preserve the logical
+organization of the experiment.
+
+A fundamental distinction is maintained between
+reusable definitions and entities associated
+with individual experimental procedures.
+
+For example, a geometry record describes
+a specimen configuration that may be referenced
+by several specimens. Similarly, a reinforcement
+material may be associated with multiple
+reinforcement components, and a material batch
+may be used for several specimen configurations.
+
+This approach avoids unnecessary duplication
+and ensures that information shared among
+multiple experimental records remains consistent.
+
+The hierarchical organization is complemented
+by relationships that connect different branches
+of the data model. For example, reinforcement
+layouts are associated with specimen geometries,
+reinforcement components reference reinforcement
+materials, and experimental data may be
+associated with specific measurement devices.
+
+These relationships are essential for preserving
+the scientific interpretation of experimental
+information. A measured displacement, for example,
+may require identification of the specimen,
+the experimental test, the loading configuration,
+and the device or measurement procedure
+associated with the observation.
+
+The database also distinguishes the definition
+of an experimental configuration from the
+individual observations obtained from its
+repeated execution. This distinction permits
+multiple experimental repetitions to be
+represented without unnecessarily duplicating
+their common configuration.
+
+The individual entity collections and their
+principal relationships are described in the
+following sections.
+
 
 \section{Literature Sources and Keywords}
 
+The \texttt{literature\_sources} collection
+constitutes the highest organizational level
+of the Experimental Database.
+
+Each literature source represents an identifiable
+origin of experimental information, such as a
+journal publication, conference paper, technical
+report, dissertation, published dataset, or
+documented experimental campaign.
+
+A source record establishes the scientific
+provenance of the associated information and
+provides the common reference through which
+the corresponding material, specimen, test,
+and measurement records are organized.
+
+Relevant metadata may include bibliographic
+information, authorship, publication details,
+digital identifiers, and other descriptors
+necessary to identify the original source.
+
+The source establishes the scope of a dataset
+submission. Under the current database hierarchy,
+each submission contains exactly one source record,
+and all associated entity records belong to
+that same source.
+
+A single source may nevertheless contain
+multiple material batches, specimen configurations,
+experimental tests, and associated observations.
+
+The \texttt{keywords} collection provides
+searchable descriptors associated with the
+source or dataset. Keywords facilitate the
+identification and classification of experimental
+information according to relevant scientific
+subjects, materials, phenomena, testing methods,
+and other characteristics.
+
+Unlike most other entity collections, individual
+keyword records are identified by their keyword
+values rather than by a numerical identifier
+with a dedicated prefix.
+
+Source-level metadata and keywords complement
+the more detailed scientific descriptors
+contained in the associated entity records.
+Their role is to support discovery and
+attribution without replacing the structured
+representation of the underlying experimental
+information.
+
+
 \section{Material Batches}
+
+The \texttt{material\_batches} collection
+describes the material systems investigated
+within an experimental source.
+
+A material batch represents a particular
+concrete mixture, cementitious composition,
+or other material system associated with
+the preparation and testing of specimens.
+
+Material batch records provide the principal
+connection between experimental observations
+and the composition and characteristics of
+the corresponding materials.
+
+Depending on the material system and the
+information available, the description may
+include mixture proportions, constituent
+materials, aggregate characteristics,
+cementitious components, admixtures,
+fibers, and relevant preparation or
+processing conditions.
+
+Additional information may characterize
+the material state, preparation history,
+curing conditions, and other attributes
+necessary for interpreting experimental
+responses.
+
+A single experimental source may include
+multiple material batches representing
+different mixture compositions or material
+systems. Each batch is assigned a distinct
+identifier within the corresponding source.
+
+A material batch may be referenced by
+multiple specimen records. Consequently,
+the same material definition can be
+associated with specimens having different
+geometries, reinforcement configurations,
+or manufacturing characteristics.
+
+This organization separates material
+characterization from specimen geometry
+and testing conditions, facilitating
+comparisons of experimental responses
+associated with changes in material
+composition while preserving the
+corresponding experimental context.
+
+The material batch definition may include
+information originally reported by the
+investigators as well as documented
+information recovered during subsequent
+data extraction or curation. The distinction
+between reported and subsequently inferred
+quantities should remain traceable.
+
 
 \section{Geometries and Specimens}
 
+The database distinguishes specimen geometry
+definitions from the specimen configurations
+in which they are used.
+
+The \texttt{geometries} collection contains
+reusable geometric configurations associated
+with an experimental source.
+
+Each geometry record identifies a geometry
+type and specifies the parameter values
+required to describe the corresponding
+configuration.
+
+Whenever applicable, geometry records
+reference the shared CIVITA Geometry Library,
+which establishes standardized parameter
+names, coordinate systems, dimensional
+conventions, and geometric constraints.
+
+A distinction is therefore maintained
+between a globally defined geometry type
+and a source-specific geometry instance.
+
+The global definition establishes the
+scientific meaning of the parametrization,
+whereas the geometry instance specifies
+the numerical dimensions and other
+information associated with the particular
+experimental configuration.
+
+The shared geometry definitions are
+introduced in Chapter 6 and documented
+in Appendix~\ref{app:geometry-library}.
+
+The \texttt{specimens} collection represents
+physical specimens or specimen families
+defined through associations with the
+corresponding material and geometric records.
+
+At a minimum, a specimen configuration
+references a material batch and a geometry.
+Additional relationships may identify a
+reinforcement layout or additive manufacturing
+variables when relevant.
+
+The specimen entity therefore provides
+the connection between the material
+characteristics and the physical
+configuration of the experimental object.
+
+For example, several specimens may share
+the same material batch while having
+different dimensions. Conversely, specimens
+with identical geometries may be manufactured
+using different material mixtures or
+reinforcement configurations.
+
+A specimen record can be associated with
+one or more experimental tests. This
+allows a common specimen configuration
+to be reused in the representation of
+different testing procedures or experimental
+conditions.
+
+The specimen entity may represent an
+individual physical specimen or a family
+of specimens sharing a common definition.
+The interpretation depends on the
+information available from the source
+and the manner in which the associated
+experimental observations are reported.
+
+This distinction is particularly important
+when experimental results are provided
+as averages or statistical summaries
+of repeated tests.
+
+
 \section{Reinforcement Materials, Components, and Layouts}
+
+The database represents reinforcement
+configurations through three interconnected
+collections:
+\texttt{reinforcement\_materials},
+\texttt{reinforcement\_components}, and
+\texttt{reinforcement\_layouts}.
+
+The separation of these entities allows
+reinforcement material properties,
+individual reinforcing elements, and
+complete reinforcement configurations
+to be described independently and reused
+across related experimental records.
+
+\paragraph{Reinforcement materials.}
+
+The \texttt{reinforcement\_materials}
+collection defines the material
+characteristics associated with reinforcing
+systems.
+
+Depending on the reinforcement type,
+the corresponding records may describe
+material classification, mechanical
+properties, strength characteristics,
+elastic moduli, and other relevant
+constitutive or physical properties.
+
+A reinforcement material definition may
+be referenced by multiple reinforcement
+components, allowing consistent use of
+material properties across different
+reinforcement arrangements.
+
+\paragraph{Reinforcement components.}
+
+The \texttt{reinforcement\_components}
+collection represents individual
+reinforcement elements or groups of
+elements forming part of a complete
+reinforcement configuration.
+
+Examples include longitudinal reinforcing
+bar layers, stirrup sets, transverse
+ties, and externally applied reinforcement
+systems.
+
+Each reinforcement component is associated
+with a reinforcement material definition
+and a reinforcement layout.
+
+A component combines material information
+with the geometric and spatial descriptors
+necessary to characterize its contribution
+to the reinforcement configuration.
+
+Such descriptors may include reinforcement
+dimensions, locations, orientations,
+spacings, and other parameters relevant
+to the particular reinforcement type.
+
+\paragraph{Reinforcement layouts.}
+
+The \texttt{reinforcement\_layouts}
+collection represents complete
+reinforcement configurations assembled
+from individual reinforcement components.
+
+Each layout is associated with a
+geometry record and is defined with
+respect to the corresponding specimen
+coordinate system and geometric
+parametrization.
+
+This relationship ensures that the
+positions and orientations of
+reinforcement components can be
+interpreted consistently with
+the associated specimen geometry.
+
+A reinforcement layout may include
+multiple components representing
+different reinforcement systems
+or reinforcement regions.
+
+The resulting layout can be referenced
+by multiple specimen records sharing
+the same geometric and reinforcement
+configuration.
+
+The separation among reinforcement
+materials, components, and layouts
+facilitates the representation of
+complex reinforcement systems while
+minimizing duplication and supporting
+future extensions of the reinforcement
+parametrization libraries.
+
 
 \section{Additive Manufacturing Variables}
 
+The \texttt{printing\_variables} collection
+provides a structured representation of
+manufacturing parameters associated with
+additively manufactured concrete and
+cementitious specimens.
+
+Additive manufacturing introduces
+process-dependent characteristics that
+may significantly influence the
+mechanical and physical response of
+the resulting material or structural
+component.
+
+Relevant information may include
+printing speed, extrusion conditions,
+material flow, nozzle characteristics,
+printing orientation, and other
+parameters describing the manufacturing
+process.
+
+These variables are represented
+separately from the material batch
+and specimen geometry, allowing
+manufacturing conditions to be
+associated explicitly with the
+resulting specimen configuration.
+
+A printing variables record may be
+referenced by multiple specimens
+manufactured using the same
+documented process conditions.
+
+The association is optional because
+printing variables are not applicable
+to conventionally cast or otherwise
+manufactured specimens.
+
+The separation of printing variables
+from the remaining specimen descriptors
+supports systematic investigations
+of manufacturing effects and facilitates
+the comparison of additively manufactured
+specimens with conventional material
+and structural configurations.
+
+The corresponding scientific descriptors
+and field definitions are documented
+in Appendix~\ref{app:experimental-schema}.
+
+
 \section{Experimental Tests}
+
+The \texttt{tests} collection represents
+experimental testing configurations
+applied to specimens.
+
+A test record establishes the
+relationship between a specimen
+configuration and the experimental
+procedure used to investigate its
+behavior.
+
+Depending on the experimental program,
+the test description may include the
+testing method, loading configuration,
+environmental conditions, observed
+physical mechanisms, and other
+information required for interpreting
+the experimental response.
+
+Examples include uniaxial compression,
+direct tension, bending, shear,
+torsion, multiaxial loading, and
+tests involving coupled mechanical,
+thermal, hygral, or chemical processes.
+
+The test entity occupies a central
+position in the database hierarchy
+because it connects the specimen
+configuration to the devices and
+supports, loading histories, and
+experimental observations associated
+with the test.
+
+A single specimen configuration
+may be associated with multiple
+test records representing different
+experimental procedures or conditions.
+
+The current data model also allows
+a test definition to represent a
+configuration subjected to repeated
+experimental execution.
+
+Individual repetition results,
+as well as aggregate quantities
+obtained from multiple repetitions,
+may be represented through
+associated data records.
+
+This organization distinguishes
+the definition of the experimental
+procedure from the observations
+obtained through its execution.
+
+Such a distinction is important
+for experimental programs involving
+multiple nominally identical specimens,
+statistical characterization of
+material properties, or repeated
+testing under comparable conditions.
+
+The standardized representation
+of tests facilitates the selection
+of experimental evidence associated
+with particular loading conditions,
+physical mechanisms, or specimen
+configurations.
+
+It also supports the reconstruction
+of computational boundary-value
+problems corresponding to the
+experimental investigations.
+
 
 \section{Devices and Supports}
 
+The \texttt{devices\_and\_supports}
+collection represents physical
+components associated with
+experimental test configurations.
+
+These components may include
+supports, loading platens,
+actuators, fixtures, sensors,
+instrumentation systems, and
+other devices relevant to
+the application or measurement
+of experimental conditions.
+
+Each device or support record
+is associated with an experimental
+test.
+
+The corresponding description
+may include device classification,
+geometry, location, orientation,
+mechanical characteristics,
+or other information relevant
+to the experimental procedure.
+
+The explicit representation
+of devices and supports is
+particularly important when
+their characteristics influence
+the observed mechanical response.
+
+For example, the dimensions
+and mechanical properties of
+loading platens, the configuration
+of roller supports, and the
+arrangement of displacement
+measurement devices may affect
+the interpretation of an
+experimental load--displacement
+response.
+
+Device records also establish
+references that can be used
+by loading histories and
+experimental data.
+
+A loading history may identify
+the actuator or other device
+through which a prescribed
+load or displacement is applied.
+
+Similarly, a measurement
+record may reference the
+instrumentation device
+associated with the observed
+quantity.
+
+These relationships allow
+the database to distinguish
+between quantities prescribed
+during an experiment and
+quantities measured at
+specific locations or
+through particular devices.
+
+The parametrization of devices
+and supports may involve
+geometric, mechanical,
+and functional descriptors.
+When available, standardized
+definitions promote consistent
+interpretation across
+different experimental programs.
+
+Detailed scientific specifications
+and supported device types are
+addressed through the
+corresponding schema and
+controlled vocabulary references.
+
+
 \section{Loading Histories}
+
+The \texttt{loading\_histories}
+collection describes the
+prescribed loading protocols
+or loading time histories
+associated with experimental
+tests.
+
+A loading history record
+is linked to a test and
+may additionally reference
+a specific device or support
+when the prescribed action
+is applied through an
+identifiable component
+of the experimental setup.
+
+Loading histories may
+describe force-controlled,
+displacement-controlled,
+deformation-controlled,
+or other experimental
+loading procedures.
+
+Depending on the test,
+the prescribed history
+may involve monotonic,
+cyclic, sustained,
+transient, or otherwise
+time-dependent actions.
+
+The loading history
+representation may include
+the controlled quantity,
+its units, the relevant
+independent variable,
+and numerical data
+describing the prescribed
+evolution.
+
+Additional descriptors
+may characterize loading
+rates, amplitudes,
+durations, or other
+parameters governing
+the experimental procedure.
+
+The distinction between
+loading histories and
+experimental data is
+fundamental.
+
+Loading histories
+describe prescribed
+actions or experimental
+control protocols,
+whereas data records
+describe observed,
+measured, or reported
+responses.
+
+For example, a prescribed
+actuator displacement
+history is represented
+as a loading history,
+while the corresponding
+measured reaction force
+is represented as an
+experimental observation.
+
+When the actual applied
+history differs from
+its nominal prescription,
+the corresponding measured
+information may also
+be preserved as
+experimental data.
+
+This separation facilitates
+the reconstruction of
+experimental boundary
+conditions and the
+comparison of computational
+predictions with measured
+responses.
+
 
 \section{Experimental Data}
 
+The \texttt{data} collection
+contains the experimental
+observations associated
+with individual tests.
+
+It constitutes the principal
+representation of the
+measured and reported
+scientific evidence
+preserved in the database.
+
+Each data record is
+associated with a test
+and may optionally
+reference a device
+or support when the
+observation is related
+to a specific measurement
+component.
+
+Experimental data
+may be represented
+through different
+data structures,
+depending on the
+nature of the
+reported information.
+
+These include scalar
+quantities, curves,
+time histories,
+tables, images,
+videos, and
+multidimensional
+measurement fields.
+
+Scalar observations
+may describe quantities
+such as peak loads,
+strength values,
+elastic moduli,
+fracture energies,
+or other experimentally
+determined characteristics.
+
+Curves and time histories
+may describe relationships
+among applied loads,
+displacements, strains,
+temperatures, environmental
+conditions, or other
+measured quantities.
+
+Tabular data may
+provide collections
+of numerical results
+associated with
+different experimental
+conditions or specimen
+configurations.
+
+Images and videos
+may document specimen
+configurations,
+experimental setups,
+deformation patterns,
+crack development,
+failure mechanisms,
+or other observations
+relevant to the
+interpretation of
+experimental behavior.
+
+Multidimensional fields
+may include spatially
+distributed measurements
+obtained through
+digital image correlation,
+thermal imaging,
+or other experimental
+techniques.
+
+Individual data records
+may describe observations
+from a particular
+experimental repetition
+or statistical summaries
+of multiple repetitions.
+
+When statistical
+information is reported,
+the distinction among
+individual observations,
+mean values, dispersion
+measures, and other
+aggregate quantities
+should remain explicit.
+
+Experimental data
+must be interpreted
+together with the
+associated test,
+specimen, material,
+and configuration
+records.
+
+For example, a
+load--displacement
+curve cannot be
+interpreted adequately
+without information
+regarding specimen
+geometry, experimental
+loading conditions,
+and the locations
+or definitions of
+the measured quantities.
+
+This contextual
+representation supports
+the systematic comparison
+of observations obtained
+from different experimental
+programs and their
+subsequent use in
+computational model
+assessment.
+
+The representation
+of numerical data,
+associated files,
+units, and measurement
+conventions is discussed
+in Chapter~\ref{chap:experimental-data-standards}.
+
+
 \section{Identifiers and Referential Integrity}
+
+The CIVITA Experimental
+Database adopts standardized
+identifiers to establish
+unambiguous relationships
+among its scientific entities.
+
+Each record is associated
+with an identifier
+appropriate to its
+entity collection.
+
+The current conventions
+include identifiers
+such as \texttt{SRC0001}
+for literature sources,
+\texttt{BAT0001}
+for material batches,
+\texttt{GEO0001}
+for geometry records,
+\texttt{SPC0001}
+for specimens,
+\texttt{TST0001}
+for tests, and
+\texttt{DAT0001}
+for experimental
+data records.
+
+Additional prefixes
+identify printing
+variables, reinforcement
+materials, reinforcement
+components, reinforcement
+layouts, devices and
+supports, and loading
+histories.
+
+These identifiers
+establish references
+within the corresponding
+experimental source
+and submission context.
+
+The current hierarchy
+requires each dataset
+submission to contain
+a single literature
+source. All associated
+records must reference
+that source through
+the \texttt{source\_id}
+field.
+
+Relationships among
+records must resolve
+within the same source,
+ensuring that each
+experimental dataset
+forms a consistent
+and identifiable
+collection of
+scientific information.
+
+The source association
+is distinct from the
+scientific parent--child
+relationships among
+entities.
+
+For example, a
+specimen record is
+associated with its
+literature source
+while also referencing
+a material batch
+and a geometry.
+Likewise, a test
+record references
+both its source
+and the specimen
+configuration to
+which it applies.
+
+This distinction
+supports the explicit
+representation of
+scientific relationships
+without relying
+exclusively on the
+hierarchical nesting
+of individual records.
+
+Referential integrity
+requires all references
+between records to
+identify existing
+entities within
+the applicable
+scope.
+
+Required relationships
+must be present
+and valid, while
+optional relationships
+may be omitted when
+the corresponding
+scientific information
+is not applicable
+or unavailable,
+subject to the
+requirements of
+the relevant schema.
+
+A further distinction
+is maintained between
+source-specific
+identifiers and
+globally defined
+scientific objects.
+
+For example,
+\texttt{GEO0001}
+identifies a geometry
+record within an
+experimental source,
+whereas a global
+geometry type
+identifier, such
+as \texttt{GLOB-GEO0001},
+identifies a shared
+parametrization
+definition maintained
+by the CIVITA Network.
+
+The geometry record
+references the
+corresponding global
+definition and its
+version while retaining
+its own source-specific
+identifier and numerical
+parameter values.
+
+This separation
+allows shared
+scientific definitions
+to evolve independently
+of the experimental
+records that use them.
+
+During subsequent
+database ingestion
+and publication,
+source-specific
+records may be
+associated with
+additional identifiers
+necessary to ensure
+persistent and
+unambiguous references
+across the CIVITA Network.
+
+The corresponding
+procedures must
+preserve the
+relationships
+established within
+the original dataset
+and maintain
+traceability to
+the submitted
+scientific information.
+
+The detailed identifier
+formats, field definitions,
+and validation
+requirements are
+provided in
+Appendix~\ref{app:experimental-schema},
+while the procedures
+governing data ingestion
+and identifier management
+are discussed in
+Chapter~\ref{chap:experimental-curation}.
+
+
 
 
 %============================================================
